@@ -100,7 +100,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        SetarCSSPadrao();
+        SetarEstiloPadrao();
         ColocarSalas();
         ColocarAulas();
         ColocarBotoesTransparente();
@@ -112,7 +112,7 @@ public class Controller implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     TrocarBotoes(item);
-                    Comparar();
+                    CompararBotoes();
                     DeixarQuadrado();
                 }
             });
@@ -121,84 +121,19 @@ public class Controller implements Initializable {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
-                        if(ocupado == true){
-                            if(item.getEffect() != null){
-                                item.setEffect(null);
-                                ocupado = false;
-                            }else{
-                                PegarEstilo(item);
-                                id = Integer.parseInt(item.getId());
-                            }
-                        }else{
-                            PegarEstilo(item);
-                            id = Integer.parseInt(item.getId());
-                            ocupado = true;
-                        }
-                    }
+                   ColocarProfessorTabelaPrincipal(item);
                 }
             });
         });
 
         menupequeno.setOnAction(event -> {
-            tamanho = "botao";
-            tamanhoquadrado = "botaoquadrado";
-
-            for (int i = 1; i < numAula.length + 1; i++) {
-                for (int a = 1; a < salas.length; a++) {
-
-                    if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                        botoes[i][a].getStyleClass().setAll("botao");
-                    }else{
-                        botoes[i][a].getStyleClass().setAll("botaoquadrado");
-                    }
-                }
-            }
-            for (int i = 0; i < 1; i++) {
-                for (int a = 0; a < botoesmodelo.length; a++) {
-                    botoesmodelo[a].getStyleClass().clear();
-                    botoesmodelo[a].getStyleClass().add("botao");
-                }
-            }
+            DeixarBotoesPequenos();
         });
         menugrande.setOnAction(event -> {
-            tamanho = "botaogrande";
-            tamanhoquadrado = "botaoquadradogrande";
-            for (int i = 1; i < numAula.length + 1; i++) {
-                for (int a = 1; a < salas.length; a++) {
-                    if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                        botoes[i][a].getStyleClass().setAll("botaogrande");
-                    }else{
-                        botoes[i][a].getStyleClass().setAll("botaoquadradogrande");
-                    }
-                }
-            }
-            for (int i = 0; i < 1; i++) {
-                for (int a = 0; a < botoesmodelo.length; a++) {
-                    botoesmodelo[a].getStyleClass().clear();
-                    botoesmodelo[a].getStyleClass().add("botaogrande");
-                }
-            }
+            DeixarBotoesGrandes();
         });
         menumedio.setOnAction(event -> {
-            tamanho = "botaomedio";
-            tamanhoquadrado = "botaoquadradomedio";
-            for (int i = 1; i < numAula.length + 1; i++) {
-                for (int a = 1; a < salas.length; a++) {
-                    //botoes[i][a].getStyleClass().clear();
-                    if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                        botoes[i][a].getStyleClass().setAll("botaomedio");
-                    }else{
-                        botoes[i][a].getStyleClass().setAll("botaoquadradomedio");
-                    }
-                }
-            }
-            for (int i = 0; i < 1; i++) {
-                for (int a = 0; a < botoesmodelo.length; a++) {
-                    //botoesmodelo[a].getStyleClass().clear();
-                    botoesmodelo[a].getStyleClass().setAll("botaomedio");
-                }
-            }
+            DeixarBotoesMedios();
         });
         salvar.setOnAction(event -> {
             CriarPasta();
@@ -219,7 +154,10 @@ public class Controller implements Initializable {
         });
     }
 
-    public void PegarEstilo(Node item) {
+
+
+    public void PegarEstiloProfessor(Node item) {
+
 
         for (Node botao: gridPaneModelo.getChildren()) {
             if(gridPaneModelo.getRowIndex(item) == gridPaneModelo.getRowIndex(botao)){
@@ -235,8 +173,26 @@ public class Controller implements Initializable {
             }
         }
     }
+    public void ColocarProfessorTabelaPrincipal(Node item){
+        if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
+            if(ocupado == true){
+                if(item.getEffect() != null){
+                    item.setEffect(null);
+                    ocupado = false;
+                }else{
+                    PegarEstiloProfessor(item);
+                    id = Integer.parseInt(item.getId());
+                }
+            }else{
+                PegarEstiloProfessor(item);
+                id = Integer.parseInt(item.getId());
+                ocupado = true;
+            }
+        }
 
-    public boolean Apagar() {
+    }
+
+    public boolean ApagarBotao() {
 
         if (ocupado == true) {
             botaoApagar.setEffect(null);
@@ -255,7 +211,7 @@ public class Controller implements Initializable {
         return ocupado;
     }
 
-    public void Comparar() {
+    public void CompararBotoes() {
 
         for (int i = 1; i < numAula.length + 1; i++) {
             for (int a = 1; a < salas.length; a++) {
@@ -346,7 +302,8 @@ public class Controller implements Initializable {
             }
         }
     }
-//System.out.println(node1.size() + node2.size());
+
+// ---- Montar a tabela principal ----
 
     public void ColocarSalas() {
         for (int a = 1; a < salas.length; a++) {
@@ -390,6 +347,9 @@ public class Controller implements Initializable {
         }
 
     }
+    // ---- Fim Tabela Principal ----
+
+    // ---- Montar a tabela Professores ----
     public void ColocarBotoesProfessores(){
         int c = 1;
         for (int i = 0; i < 1; i++) {
@@ -421,7 +381,9 @@ public class Controller implements Initializable {
         }
 
     }
-    public void SetarCSSPadrao(){
+    // ---- Fim Tabela Professores ----
+
+    public void SetarEstiloPadrao(){
         anchorprincipal.getStylesheets().add(getClass().getResource("botao.css").toExternalForm());
         scroll.getStylesheets().add(getClass().getResource("scrollpane.css").toExternalForm());
         scroll2.getStylesheets().add(getClass().getResource("scrollpane.css").toExternalForm());
@@ -431,6 +393,7 @@ public class Controller implements Initializable {
         botaoApagar.setId(String.valueOf(0));
 
     }
+    // ---- Inicio JSON ----
     private void EscreverJSONTabela(){
         Gson gson = new Gson();
         FileWriter writeFile = null;
@@ -540,6 +503,73 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+    // ---- Fim JSON ----
+
+    // ---- Menu do Tamanho dos Botoes ----
+
+    public void DeixarBotoesPequenos(){
+
+        tamanho = "botao";
+        tamanhoquadrado = "botaoquadrado";
+
+        for (int i = 1; i < numAula.length + 1; i++) {
+            for (int a = 1; a < salas.length; a++) {
+
+                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
+                    botoes[i][a].getStyleClass().setAll("botao");
+                }else{
+                    botoes[i][a].getStyleClass().setAll("botaoquadrado");
+                }
+            }
+        }
+        for (int i = 0; i < 1; i++) {
+            for (int a = 0; a < botoesmodelo.length; a++) {
+                botoesmodelo[a].getStyleClass().clear();
+                botoesmodelo[a].getStyleClass().add("botao");
+            }
+        }
+
+    }
+    public void DeixarBotoesGrandes(){
+        tamanho = "botaogrande";
+        tamanhoquadrado = "botaoquadradogrande";
+        for (int i = 1; i < numAula.length + 1; i++) {
+            for (int a = 1; a < salas.length; a++) {
+                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
+                    botoes[i][a].getStyleClass().setAll("botaogrande");
+                }else{
+                    botoes[i][a].getStyleClass().setAll("botaoquadradogrande");
+                }
+            }
+        }
+        for (int i = 0; i < 1; i++) {
+            for (int a = 0; a < botoesmodelo.length; a++) {
+                botoesmodelo[a].getStyleClass().clear();
+                botoesmodelo[a].getStyleClass().add("botaogrande");
+            }
+        }
+    }
+    public void DeixarBotoesMedios(){
+        tamanho = "botaomedio";
+        tamanhoquadrado = "botaoquadradomedio";
+        for (int i = 1; i < numAula.length + 1; i++) {
+            for (int a = 1; a < salas.length; a++) {
+                //botoes[i][a].getStyleClass().clear();
+                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
+                    botoes[i][a].getStyleClass().setAll("botaomedio");
+                }else{
+                    botoes[i][a].getStyleClass().setAll("botaoquadradomedio");
+                }
+            }
+        }
+        for (int i = 0; i < 1; i++) {
+            for (int a = 0; a < botoesmodelo.length; a++) {
+                //botoesmodelo[a].getStyleClass().clear();
+                botoesmodelo[a].getStyleClass().setAll("botaomedio");
+            }
+        }
+    }
+    // ---- Fim Menu Botoes ----
     private void CriarPasta(){
         File diretorio = new File("backup " + date );
         diretorio.mkdir();

@@ -76,7 +76,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="botaoApagar" layoutX="212.0" layoutY="540.0" mnemonicParsing="false" onAction="#Apagar" text="Apagar" AnchorPane.bottomAnchor="35.0" />
+      <Button fx:id="botaoApagar" layoutX="212.0" layoutY="540.0" mnemonicParsing="false" onAction="#ApagarBotao" text="Apagar" AnchorPane.bottomAnchor="35.0" />
       <Label fx:id="labelerro" layoutX="37.0" layoutY="38.0" prefHeight="25.0" prefWidth="230.0" text="Mudanças permitidas apenas nas colunas" textAlignment="CENTER" textFill="RED" visible="false">
          <font>
             <Font size="8.0" />
