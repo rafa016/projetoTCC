@@ -111,52 +111,7 @@ public class Controller implements Initializable {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-
-                    if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
-
-                        if (ocupado == true) {
-                            item.getStyleClass().setAll(tamanho);
-                            item.setStyle(estilo);
-                            matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = id;
-                            if (botaoApagar.getEffect() != null) {
-                                matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
-                                matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
-                            }
-                        } else {
-                            if (control == 1) {
-                                if (GridPane.getColumnIndex(item) == b) {
-                                    botao2 = item;
-                                    idtroca2 = matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
-                                    idcontroleigual2 = matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
-                                    matrizcontrole[a][b] = idtroca2;
-                                    matrizcontroleigual[a][b] = idcontroleigual2;
-                                    matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idtroca1;
-                                    matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idcontroleigual1;
-                                    GridPane.setConstraints(botao, GridPane.getColumnIndex(item), GridPane.getRowIndex(item));
-                                    GridPane.setConstraints(botao2, b, a);
-                                    botao2.setEffect(null);
-                                    botao.setEffect(null);
-                                    labelerro.setVisible(false);
-                                    control = 0;
-                                } else {
-                                    item.setEffect(null);
-                                    botao.setEffect(null);
-                                    control = 0;
-                                    labelerro.setVisible(true);
-                                }
-                            } else {
-                                a = GridPane.getRowIndex(item);
-                                b = GridPane.getColumnIndex(item);
-                                botao = item;
-                                idtroca1 = matrizcontrole[a][b];
-                                idcontroleigual1 = matrizcontroleigual[a][b];
-                                control = 1;
-                                dp.setSpread(0.30);
-                                dp.setColor(Color.DARKRED);
-                                item.setEffect(dp);
-                            }
-                        }
-                    }
+                    TrocarBotoes(item);
                     Comparar();
                     DeixarQuadrado();
                 }
@@ -345,7 +300,51 @@ public class Controller implements Initializable {
         }
     }
     public void TrocarBotoes(Node item){
+        if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
 
+            if (ocupado == true) {
+                item.getStyleClass().setAll(tamanho);
+                item.setStyle(estilo);
+                matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = id;
+                if (botaoApagar.getEffect() != null) {
+                    matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
+                    matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
+                }
+            } else {
+                if (control == 1) {
+                    if (GridPane.getColumnIndex(item) == b) {
+                        botao2 = item;
+                        idtroca2 = matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
+                        idcontroleigual2 = matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
+                        matrizcontrole[a][b] = idtroca2;
+                        matrizcontroleigual[a][b] = idcontroleigual2;
+                        matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idtroca1;
+                        matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idcontroleigual1;
+                        GridPane.setConstraints(botao, GridPane.getColumnIndex(item), GridPane.getRowIndex(item));
+                        GridPane.setConstraints(botao2, b, a);
+                        botao2.setEffect(null);
+                        botao.setEffect(null);
+                        labelerro.setVisible(false);
+                        control = 0;
+                    } else {
+                        item.setEffect(null);
+                        botao.setEffect(null);
+                        control = 0;
+                        labelerro.setVisible(true);
+                    }
+                } else {
+                    a = GridPane.getRowIndex(item);
+                    b = GridPane.getColumnIndex(item);
+                    botao = item;
+                    idtroca1 = matrizcontrole[a][b];
+                    idcontroleigual1 = matrizcontroleigual[a][b];
+                    control = 1;
+                    dp.setSpread(0.30);
+                    dp.setColor(Color.DARKRED);
+                    item.setEffect(dp);
+                }
+            }
+        }
     }
 //System.out.println(node1.size() + node2.size());
 
