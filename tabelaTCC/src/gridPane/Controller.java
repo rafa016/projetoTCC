@@ -16,15 +16,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import jdk.nashorn.internal.scripts.JO;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLOutput;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -60,25 +57,18 @@ public class Controller implements Initializable {
     };
 
     private boolean[] tecnico = { false, true, true, true, false, false, false};
-    private Node botao, botao2, node1botao, node2botao;
-    private Node result2;
-    private Label[] lblturmab = new Label[salas.length];
-    private Node node1;
-    private  Node node2;
+    private Node botao, botao2;
     private int c = 1, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2;
-    private Integer linhaModelo;
-    private double control1 = 1;
     private Button[] botoesmodelo = new Button[6];
     private Button[][] botoes = new Button[numAula.length + 1][salas.length];
     private Label[] lblnumaula = new Label[numAula.length];
     private Label[] lblsala = new Label[salas.length];
-    private Label[] lblespaco = new Label[salas.length];
     private Label[] lblprofessores = new Label[botoesmodelo.length];
     private int[][] matrizcontrole = new int[numAula.length + 1][salas.length];
     private int[][] matrizcontroleigual = new int[numAula.length + 1][salas.length];
     private int[] idmodelos= new int[botoesmodelo.length];
     private String estilo, tamanho = "botao", tamanhoquadrado = "botaoquadrado";
-    private String classe;
+
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 
@@ -399,7 +389,7 @@ public class Controller implements Initializable {
         FileWriter writeFile = null;
         try{
             String jsonTabela = gson.toJson(matrizcontrole);
-            JOptionPane.showMessageDialog(null, jsonTabela);
+
             writeFile = new FileWriter("backup " +  date + "\\tabelaprincipal.json");
             writeFile.write(
                     jsonTabela);
@@ -417,7 +407,7 @@ public class Controller implements Initializable {
         String[] jsonEstilos;
         String[] jsonSalas;
         String[] jsonNumAulas;
-        JSONParser parser = new JSONParser();
+
         try {
             jsonTabelaPrincipal = gson.fromJson(new FileReader("backup " +  date + "\\tabelaprincipal.json"), String[][].class);
             JOptionPane.showMessageDialog(null, jsonTabelaPrincipal);
