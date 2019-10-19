@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="tabelaTCC:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tabelaTCC_jar</output-path>
+    <root id="archive" name="tabelaTCC.jar">
+      <element id="module-output" name="tabelaTCC" />
+    </root>
+  </artifact>
+</component>
