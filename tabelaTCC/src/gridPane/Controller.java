@@ -4,6 +4,14 @@ package gridPane;
 
 
 import com.google.gson.Gson;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +19,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +30,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 
+import javax.print.Doc;
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 
@@ -47,7 +61,7 @@ public class Controller implements Initializable {
 
 
     public String[] salas = /*new String[41];*/{
-            "1E", "1Q", "1I", "1A", "1B", "1C"//, "2E", "2Q", "2I","2A", "2B", "2C", "3E", "3Q", "3I","3A", "3B", "3C",
+            " ", "1E", "1Q", "1I", "1A", "1B", "1C", "2E", "2Q", "2I","2A", "2B", "2C", "3E", "3Q", "3I","3A", "3B", "3C",
     };
     private String[] professores = {
             "Rubens", "Giu", "Robertop", "Soninha", "Teté", "Thiago"
@@ -135,12 +149,13 @@ public class Controller implements Initializable {
             EscreverJSONQNTSalas();
         });
         ler.setOnAction(event -> {
-            for(int i = 1; i < matrizcontroleigual.length; i++){
+            /*for(int i = 1; i < matrizcontroleigual.length; i++){
                 System.out.println();
                 for(int j = 1; j < matrizcontroleigual[0].length; j++){
                     System.out.print(" " +matrizcontroleigual[i][j] + " ");
                 }
-            }
+            }*/
+            GerarPDF();
         });
     }
 
@@ -564,6 +579,96 @@ public class Controller implements Initializable {
         File diretorio = new File("backup " + date );
         diretorio.mkdir();
     }
+    // ---- Gerar PDF ----
+    private void GerarPDF(){
+
+
+        Document doc = new Document();
+        PdfPCell[] cabecalho = new PdfPCell[salas.length];
+        float[] widths = new float[salas.length];
+        PdfPCell[][] corpo = new PdfPCell[numAula.length + 1][salas.length];
+
+
+
+        try {
+            PdfWriter.getInstance(doc , new FileOutputStream("Horario.pdf"));
+
+            doc.open();
+
+            PdfPTable pdftable = new PdfPTable(salas.length );
+
+
+
+            for(int i = 0; i < salas.length ; i ++){
+
+                if(i == 0){
+                    cabecalho[i]  = new PdfPCell(new Paragraph(" "));
+                    pdftable.addCell(cabecalho[i]);
+                }else {
+
+
+                    cabecalho[i] = new PdfPCell(new Paragraph(salas[i]));
+                    cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
+                    pdftable.addCell(cabecalho[i]);
+                }
+            }
+            for(int i = 1; i < numAula.length + 1; i ++) {
+                for(int j = 0; j < salas.length ; j ++) {
+                    if (j == 0) {
+                        corpo[i][j] = new PdfPCell(new Paragraph(numAula[i -1]));
+                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                        pdftable.addCell(corpo[i][j]);
+                    } else {
+                        if(matrizcontrole[i][j] != 0){
+                            corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] -1] ));
+                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+
+                            pdftable.addCell(corpo[i][j]);
+                        }else{
+
+                            corpo[i][j] = new PdfPCell(new Paragraph( " "));
+                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                            pdftable.addCell(corpo[i][j]);
+
+
+                        }
+                    }
+
+                    }
+                }
+
+                /*for (int j = 0; j < salas.length + 1; j++) {
+                    if (j == 0) {
+                        corpo[j] = new PdfPCell(new Paragraph(numAula[j]));
+                        corpo[j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                        pdftable.addCell(corpo[i][j]);
+                    } else {
+
+                        corpo[j] = new PdfPCell(new Paragraph(matrizcontrole[i][j -1] + ""));
+                        corpo[j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                        pdftable.addCell(corpo[j]);
+                    }
+
+                }*/
+
+
+
+
+            doc.add(pdftable);
+            doc.close();
+            Desktop.getDesktop().open(new File("Horario.pdf"));
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
 
 
