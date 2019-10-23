@@ -5,10 +5,7 @@ package gridPane;
 
 import com.google.gson.Gson;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -583,15 +580,18 @@ public class Controller implements Initializable {
     private void GerarPDF(){
 
 
-        Document doc = new Document();
+        Document doc = new Document(PageSize.A4);
+
         PdfPCell[] cabecalho = new PdfPCell[salas.length];
         float[] widths = new float[salas.length];
         PdfPCell[][] corpo = new PdfPCell[numAula.length + 1][salas.length];
+        int fontSize = 8;
 
 
 
         try {
             PdfWriter.getInstance(doc , new FileOutputStream("Horario.pdf"));
+
 
             doc.open();
 
@@ -602,12 +602,12 @@ public class Controller implements Initializable {
             for(int i = 0; i < salas.length ; i ++){
 
                 if(i == 0){
-                    cabecalho[i]  = new PdfPCell(new Paragraph(" "));
+                    cabecalho[i]  = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
                     pdftable.addCell(cabecalho[i]);
                 }else {
 
 
-                    cabecalho[i] = new PdfPCell(new Paragraph(salas[i]));
+                    cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                     cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
                     pdftable.addCell(cabecalho[i]);
                 }
@@ -615,12 +615,12 @@ public class Controller implements Initializable {
             for(int i = 1; i < numAula.length + 1; i ++) {
                 for(int j = 0; j < salas.length ; j ++) {
                     if (j == 0) {
-                        corpo[i][j] = new PdfPCell(new Paragraph(numAula[i -1]));
+                        corpo[i][j] = new PdfPCell(new Paragraph(numAula[i -1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                         corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
                         pdftable.addCell(corpo[i][j]);
                     } else {
                         if(matrizcontrole[i][j] != 0){
-                            corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] -1] ));
+                            corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] -1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                             corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
 
                             pdftable.addCell(corpo[i][j]);
