@@ -9,6 +9,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.javafx.scene.layout.region.Margins;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,7 +65,7 @@ public class Controller implements Initializable {
             "Rubens", "Giu", "Robertop", "Soninha", "Teté", "Thiago"
     };
     private String[] numAula = /*new String[28];*/ {
-            "1", "2", "3", "4", "5", "6", "7", "8",//"1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8"
+            "1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8", "1", "2", "3", "4", "5", "6", "7", "8", "1", "2", "3", "4", "5", "6", "7", "8"
     };
 
     private boolean[] tecnico = { false, true, true, true, false, false, false};
@@ -580,10 +581,14 @@ public class Controller implements Initializable {
     private void GerarPDF(){
 
 
-        Document doc = new Document(PageSize.A4);
+        Document doc = new Document(PageSize.A4.rotate(), 0, 0, 20, 20);
 
+
+        int controlWhiteCells = 0;
         PdfPCell[] cabecalho = new PdfPCell[salas.length];
         float[] widths = new float[salas.length];
+        PdfPCell whiteCells;
+
         PdfPCell[][] corpo = new PdfPCell[numAula.length + 1][salas.length];
         int fontSize = 8;
 
@@ -603,35 +608,55 @@ public class Controller implements Initializable {
 
                 if(i == 0){
                     cabecalho[i]  = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                    cabecalho[i].setFixedHeight(12);
                     pdftable.addCell(cabecalho[i]);
                 }else {
 
 
                     cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                     cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cabecalho[i].setFixedHeight(12);
+
                     pdftable.addCell(cabecalho[i]);
                 }
             }
             for(int i = 1; i < numAula.length + 1; i ++) {
                 for(int j = 0; j < salas.length ; j ++) {
-                    if (j == 0) {
-                        corpo[i][j] = new PdfPCell(new Paragraph(numAula[i -1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                        pdftable.addCell(corpo[i][j]);
-                    } else {
-                        if(matrizcontrole[i][j] != 0){
-                            corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] -1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                    if(i != 9) {
+                        if (i % 8 != 0) {
+                            if (j == 0) {
+                                corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                corpo[i][j].setFixedHeight(12);
+                                pdftable.addCell(corpo[i][j]);
+                            } else {
+                                if (matrizcontrole[i][j] != 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdftable.addCell(corpo[i][j]);
+                                } else {
 
-                            pdftable.addCell(corpo[i][j]);
-                        }else{
+                                    corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdftable.addCell(corpo[i][j]);
 
-                            corpo[i][j] = new PdfPCell(new Paragraph( " "));
-                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                            pdftable.addCell(corpo[i][j]);
+
+                                }
+                            }
+                        } else {
+
+
+                            whiteCells = new PdfPCell(new Paragraph(" "));
+                            pdftable.addCell(whiteCells);
 
 
                         }
+                    }else{
+                        whiteCells = new PdfPCell(new Paragraph(" "));
+                        pdftable.addCell(whiteCells);
+
                     }
 
                     }
