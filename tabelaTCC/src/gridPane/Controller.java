@@ -22,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -70,7 +72,7 @@ public class Controller implements Initializable {
 
     private boolean[] tecnico = { false, true, true, true, false, false, false};
     private Node botao, botao2;
-    private int c = 1, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2;
+    private int c = 1, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2, delBusy = 0;
     private Button[] botoesmodelo = new Button[6];
     private Button[][] botoes = new Button[numAula.length + 1][salas.length];
     private Label[] lblnumaula = new Label[numAula.length];
@@ -80,6 +82,7 @@ public class Controller implements Initializable {
     private int[][] matrizcontroleigual = new int[numAula.length + 1][salas.length];
     private int[] idmodelos= new int[botoesmodelo.length];
     private String estilo, tamanho = "botao", tamanhoquadrado = "botaoquadrado";
+    boolean delPressed = false;
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
@@ -154,6 +157,36 @@ public class Controller implements Initializable {
                 }
             }*/
             GerarPDF();
+        });
+
+        anchorprincipal.setOnKeyPressed(event ->  {
+
+
+
+            if(event.getCode() == KeyCode.DELETE){
+
+                delPressed = true;
+
+            }
+            if(delPressed & delBusy == 0){
+
+                ApagarBotao();
+
+            }
+            delBusy += 1;
+
+        });
+        anchorprincipal.setOnKeyReleased(event -> {
+            if(event.getCode() == KeyCode.DELETE){
+
+                delPressed = false;
+                ApagarBotao();
+                delBusy = 0;
+
+
+            }
+
+
         });
     }
 
@@ -580,7 +613,10 @@ public class Controller implements Initializable {
     // ---- Gerar PDF ----
     private void GerarPDF(){
 
+        int numberOfTables = (matrizcontrole.length -1) / 8;
+        JOptionPane.showMessageDialog(null, numberOfTables);
 
+//        PdfPTable[] tables = new PdfPTable[];
         Document doc = new Document(PageSize.A4.rotate(), 0, 0, 20, 20);
 
 
@@ -600,81 +636,59 @@ public class Controller implements Initializable {
 
             doc.open();
 
-            PdfPTable pdftable = new PdfPTable(salas.length );
-
-
-
+            PdfPTable pdftable = new PdfPTable(salas.length);
             for(int i = 0; i < salas.length ; i ++){
-
                 if(i == 0){
                     cabecalho[i]  = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
                     cabecalho[i].setFixedHeight(12);
                     pdftable.addCell(cabecalho[i]);
                 }else {
-
-
                     cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                     cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
                     cabecalho[i].setFixedHeight(12);
-
                     pdftable.addCell(cabecalho[i]);
                 }
             }
-            for(int i = 1; i < numAula.length + 1; i ++) {
+
+
+            /*for(int i = 1; i < numAula.length + 1; i ++) {
                 for(int j = 0; j < salas.length ; j ++) {
-                    if(i != 9) {
+                    if(i != 10) {
                         if (i % 8 != 0) {
-                            if (j == 0) {
-                                corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                corpo[i][j].setFixedHeight(12);
-                                pdftable.addCell(corpo[i][j]);
-                            } else {
-                                if (matrizcontrole[i][j] != 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                            if(i != 8) {
+
+                                if (j == 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                                     corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
                                     corpo[i][j].setFixedHeight(12);
                                     pdftable.addCell(corpo[i][j]);
                                 } else {
-
-                                    corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdftable.addCell(corpo[i][j]);
-
-
+                                    if (matrizcontrole[i][j] != 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdftable.addCell(corpo[i][j]);
+                                    } else {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdftable.addCell(corpo[i][j]);
+                                    }
                                 }
                             }
                         } else {
-
-
                             whiteCells = new PdfPCell(new Paragraph(" "));
                             pdftable.addCell(whiteCells);
-
-
                         }
                     }else{
                         whiteCells = new PdfPCell(new Paragraph(" "));
                         pdftable.addCell(whiteCells);
-
                     }
 
                     }
-                }
-
-                /*for (int j = 0; j < salas.length + 1; j++) {
-                    if (j == 0) {
-                        corpo[j] = new PdfPCell(new Paragraph(numAula[j]));
-                        corpo[j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                        pdftable.addCell(corpo[i][j]);
-                    } else {
-
-                        corpo[j] = new PdfPCell(new Paragraph(matrizcontrole[i][j -1] + ""));
-                        corpo[j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                        pdftable.addCell(corpo[j]);
-                    }
-
                 }*/
+
+
 
 
 
@@ -693,6 +707,7 @@ public class Controller implements Initializable {
 
 
     }
+
 
 }
 

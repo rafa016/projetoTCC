@@ -247,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571802437138</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Page orientation bug fixed">
+      <created>1571884485069</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1571884485070</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -275,10 +282,7 @@
     <MESSAGE value="Gson adicionado ao projeto" />
     <MESSAGE value="Criar PDF quase pronto" />
     <MESSAGE value="Revert &quot;Create PDF&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Create PDF&quot;" />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
+    <MESSAGE value="Page orientation bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Page orientation bug fixed" />
   </component>
 </project>
