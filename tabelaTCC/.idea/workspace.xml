@@ -6,12 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Revert &quot;Create PDF&quot;">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="hold delete to delete buttons implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Horario.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Horario.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gridPane/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridPane/Controller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -254,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571884485070</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="hold delete to delete buttons implemented">
+      <created>1572512077801</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1572512077801</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -283,6 +287,7 @@
     <MESSAGE value="Criar PDF quase pronto" />
     <MESSAGE value="Revert &quot;Create PDF&quot;" />
     <MESSAGE value="Page orientation bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Page orientation bug fixed" />
+    <MESSAGE value="hold delete to delete buttons implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="hold delete to delete buttons implemented" />
   </component>
 </project>

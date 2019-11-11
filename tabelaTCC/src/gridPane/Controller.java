@@ -82,7 +82,7 @@ public class Controller implements Initializable {
     private int[][] matrizcontroleigual = new int[numAula.length + 1][salas.length];
     private int[] idmodelos= new int[botoesmodelo.length];
     private String estilo, tamanho = "botao", tamanhoquadrado = "botaoquadrado";
-    boolean delPressed = false;
+    boolean delPressed = false, trocando = false, pegandoModelo = false;
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
@@ -194,20 +194,28 @@ public class Controller implements Initializable {
 
     public void PegarEstiloProfessor(Node item) {
 
+        if(botaoApagar.getEffect() == null) {
 
-        for (Node botao: gridPaneModelo.getChildren()) {
-            if(gridPaneModelo.getRowIndex(item) == gridPaneModelo.getRowIndex(botao)){
-                DropShadow dp = new DropShadow();
-                estilo = item.getStyle();
-                dp.setHeight(30);
-                dp.setWidth(30);
-                dp.setSpread(0.21);
-                dp.setColor(Color.BLUE);
-                item.setEffect(dp);
-            }else{
-                botao.setEffect(null);
+            for (Node botao : gridPaneModelo.getChildren()) {
+                if (gridPaneModelo.getRowIndex(item) == gridPaneModelo.getRowIndex(botao)) {
+
+                    DropShadow dp = new DropShadow();
+                    estilo = item.getStyle();
+                    dp.setHeight(30);
+                    dp.setWidth(30);
+                    dp.setSpread(0.21);
+                    dp.setColor(Color.BLUE);
+                    item.setEffect(dp);
+
+
+                } else {
+                    botao.setEffect(null);
+
+                }
             }
+
         }
+
     }
     public void ColocarProfessorTabelaPrincipal(Node item){
         if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
@@ -215,6 +223,7 @@ public class Controller implements Initializable {
                 if(item.getEffect() != null){
                     item.setEffect(null);
                     ocupado = false;
+                    pegandoModelo = false;
                 }else{
                     PegarEstiloProfessor(item);
                     id = Integer.parseInt(item.getId());
@@ -223,26 +232,33 @@ public class Controller implements Initializable {
                 PegarEstiloProfessor(item);
                 id = Integer.parseInt(item.getId());
                 ocupado = true;
+                pegandoModelo = true;
             }
         }
 
     }
 
     public boolean ApagarBotao() {
+        if (pegandoModelo == false) {
+            if (trocando == false) {
+                if (ocupado == true) {
+                    botaoApagar.setEffect(null);
+                    estilo = null;
+                    ocupado = false;
+                } else {
+                    DropShadow dp = new DropShadow();
+                    estilo = "-fx-background-color: #FFFFFF ;-fx-border-color: #FFFFFF; id:0";
+                    dp.setHeight(30);
+                    dp.setWidth(30);
+                    dp.setSpread(0.21);
+                    dp.setColor(Color.BLUE);
+                    botaoApagar.setEffect(dp);
+                    ocupado = true;
+                }
+            } else {
 
-        if (ocupado == true) {
-            botaoApagar.setEffect(null);
-            estilo = null;
-            ocupado = false;
-        } else {
-            DropShadow dp = new DropShadow();
-            estilo = "-fx-background-color: #FFFFFF ;-fx-border-color: #FFFFFF; id:0";
-            dp.setHeight(30);
-            dp.setWidth(30);
-            dp.setSpread(0.21);
-            dp.setColor(Color.BLUE);
-            botaoApagar.setEffect(dp);
-            ocupado = true;
+
+            }
         }
         return ocupado;
     }
@@ -292,6 +308,9 @@ public class Controller implements Initializable {
         }
     }
     public void TrocarBotoes(Node item){
+
+
+
         if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
 
             if (ocupado == true) {
@@ -318,11 +337,13 @@ public class Controller implements Initializable {
                         botao.setEffect(null);
                         labelerro.setVisible(false);
                         control = 0;
+                        trocando = false;
                     } else {
                         item.setEffect(null);
                         botao.setEffect(null);
                         control = 0;
                         labelerro.setVisible(true);
+                        trocando = false;
                     }
                 } else {
                     a = GridPane.getRowIndex(item);
@@ -334,9 +355,11 @@ public class Controller implements Initializable {
                     dp.setSpread(0.30);
                     dp.setColor(Color.DARKRED);
                     item.setEffect(dp);
+                    trocando = true;
                 }
             }
         }
+
     }
 
 // ---- Montar a tabela principal ----
@@ -368,13 +391,21 @@ public class Controller implements Initializable {
     }
 
     public void ColocarBotoesTransparente(){
+
+
         for (int i = 1; i < numAula.length + 1; i++) {
             for (int a = 1; a < salas.length; a++) {
                 botoes[i][a] = new Button();
                 botoes[i][a].setCursor(HAND);
                 botoes[i][a].getStyleClass().setAll("botao");
-                botoes[i][a].setStyle(styles[0]);
-                matrizcontroleigual[i][a] = 0;
+                if(matrizcontrole[i][a] != 0){
+
+                    botoes[i][a].setStyle(styles[matrizcontrole[i][a]]);
+
+                }else{
+                    botoes[i][a].setStyle(styles[0]);
+                    matrizcontroleigual[i][a] = 0;
+                }
                 gridPane.setConstraints(botoes[i][a], a, i);
                 gridPane.setMargin(botoes[i][a], new Insets(4));
                 gridPane.getChildren().addAll(botoes[i][a]);
