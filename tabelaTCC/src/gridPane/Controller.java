@@ -645,7 +645,7 @@ public class Controller implements Initializable {
     private void GerarPDF(){
 
         int numberOfTables = (matrizcontrole.length -1) / 8;
-        JOptionPane.showMessageDialog(null, numberOfTables);
+
 
 //        PdfPTable[] tables = new PdfPTable[];
         Document doc = new Document(PageSize.A4.rotate(), 0, 0, 20, 20);
@@ -658,74 +658,70 @@ public class Controller implements Initializable {
 
         PdfPCell[][] corpo = new PdfPCell[numAula.length + 1][salas.length];
         int fontSize = 8;
+        PdfPTable[] pdfPTables = new PdfPTable[numAula.length/8];
 
 
 
         try {
             PdfWriter.getInstance(doc , new FileOutputStream("Horario.pdf"));
 
-
             doc.open();
 
-            PdfPTable pdftable = new PdfPTable(salas.length);
-            for(int i = 0; i < salas.length ; i ++){
-                if(i == 0){
-                    cabecalho[i]  = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                    cabecalho[i].setFixedHeight(12);
-                    pdftable.addCell(cabecalho[i]);
-                }else {
-                    cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                    cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cabecalho[i].setFixedHeight(12);
-                    pdftable.addCell(cabecalho[i]);
+           for(int k = 0; k < pdfPTables.length; k++) {
+
+                pdfPTables[k]  = new PdfPTable(salas.length);
+                for (int i = 0; i < salas.length; i++) {
+                    if (i == 0) {
+                        cabecalho[i] = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                        cabecalho[i].setFixedHeight(12);
+                        pdfPTables[k].addCell(cabecalho[i]);
+                    } else {
+                        cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                        cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
+                        cabecalho[i].setFixedHeight(12);
+                        pdfPTables[k].addCell(cabecalho[i]);
+                    }
                 }
+
+                for (int i = 1; i < (numAula.length / 5) + 1; i++) {
+                    for (int j = 0; j < salas.length; j++) {
+
+
+                        if (j == 0) {
+                            corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                            corpo[i][j].setFixedHeight(12);
+                            pdfPTables[k].addCell(corpo[i][j]);
+                        } else {
+                            if (matrizcontrole[i][j] != 0) {
+                                corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                corpo[i][j].setFixedHeight(12);
+                                pdfPTables[k].addCell(corpo[i][j]);
+                            } else {
+                                corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                corpo[i][j].setFixedHeight(12);
+                                pdfPTables[k].addCell(corpo[i][j]);
+                            }
+                        }
+                    }
+                }
+                doc.add(pdfPTables[k]);
+
+
+
+
             }
 
-
-            /*for(int i = 1; i < numAula.length + 1; i ++) {
-                for(int j = 0; j < salas.length ; j ++) {
-                    if(i != 10) {
-                        if (i % 8 != 0) {
-                            if(i != 8) {
-
-                                if (j == 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdftable.addCell(corpo[i][j]);
-                                } else {
-                                    if (matrizcontrole[i][j] != 0) {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdftable.addCell(corpo[i][j]);
-                                    } else {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdftable.addCell(corpo[i][j]);
-                                    }
-                                }
-                            }
-                        } else {
-                            whiteCells = new PdfPCell(new Paragraph(" "));
-                            pdftable.addCell(whiteCells);
-                        }
-                    }else{
-                        whiteCells = new PdfPCell(new Paragraph(" "));
-                        pdftable.addCell(whiteCells);
-                    }
-
-                    }
-                }*/
-
-
-
-
-
-
-            doc.add(pdftable);
             doc.close();
+
+
+
+
+
+
+
             Desktop.getDesktop().open(new File("Horario.pdf"));
 
         } catch (DocumentException e) {
