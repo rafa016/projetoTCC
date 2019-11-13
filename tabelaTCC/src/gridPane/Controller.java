@@ -72,14 +72,15 @@ public class Controller implements Initializable {
 
     private boolean[] tecnico = { false, true, true, true, false, false, false};
     private Node botao, botao2;
-    private int c = 1, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2, delBusy = 0;
+    private int c = 0, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2, delBusy = 0, numLinhas = numAula.length + (numAula.length/8);
     private Button[] botoesmodelo = new Button[6];
-    private Button[][] botoes = new Button[numAula.length + 1][salas.length];
-    private Label[] lblnumaula = new Label[numAula.length];
+
+    private Button[][] botoes = new Button[numLinhas][salas.length];
+    private Label[] lblnumaula = new Label[numLinhas];
     private Label[] lblsala = new Label[salas.length];
     private Label[] lblprofessores = new Label[botoesmodelo.length];
-    private int[][] matrizcontrole = new int[numAula.length + 1][salas.length];
-    private int[][] matrizcontroleigual = new int[numAula.length + 1][salas.length];
+    private int[][] matrizcontrole = new int[numLinhas][salas.length];
+    private int[][] matrizcontroleigual = new int[numLinhas][salas.length];
     private int[] idmodelos= new int[botoesmodelo.length];
     private String estilo, tamanho = "botao", tamanhoquadrado = "botaoquadrado";
     boolean delPressed = false, trocando = false, pegandoModelo = false;
@@ -265,12 +266,12 @@ public class Controller implements Initializable {
 
     public void CompararBotoes() {
 
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 matrizcontroleigual[i][a] = 0;
             }
         }
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 for (int c = a + 1; c < salas.length; c++) {
                     //System.out.println(i + "" + a + "   " + i+ ""+ c);
@@ -286,7 +287,7 @@ public class Controller implements Initializable {
     }
     public void DeixarQuadrado() {
 
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 if (matrizcontroleigual[i][a] == 1) {
                     for (Node node : gridPane.getChildren()) {
@@ -376,24 +377,39 @@ public class Controller implements Initializable {
         }
     }
     public void ColocarAulas(){
-        for (int i = 1; i <= numAula.length; i++) {
+
+        for (int i = 1; i <= numLinhas; i++) {
             for (int a = 0; a < 1; a++) {
-                lblnumaula[i - 1] = new Label();
-                lblnumaula[i - 1].setText(numAula[i - 1]);
-                lblnumaula[i - 1].setStyle("-fx-font-size: 8px;");
-                lblnumaula[i - 1].setAlignment(Pos.CENTER);
-                gridPane.setConstraints(lblnumaula[i - 1], 0, c);
-                gridPane.setMargin(lblnumaula[i - 1], new Insets(4));
-                gridPane.getChildren().addAll(lblnumaula[i - 1]);
-                c++;
+                if(i % 9 == 0){
+                    lblnumaula[i - 1] = new Label();
+
+                    lblnumaula[i - 1].setStyle("-fx-font-size: 8px;");
+                    lblnumaula[i - 1].setAlignment(Pos.CENTER);
+                    gridPane.setConstraints(lblnumaula[i - 1], 0, i);
+                    gridPane.setMargin(lblnumaula[i - 1], new Insets(4));
+                    gridPane.getChildren().addAll(lblnumaula[i - 1]);
+
+                }else {
+
+                        lblnumaula[i - 1] = new Label();
+                        lblnumaula[i - 1].setText(numAula[c]);
+                        lblnumaula[i - 1].setStyle("-fx-font-size: 8px;");
+                        lblnumaula[i - 1].setAlignment(Pos.CENTER);
+                        gridPane.setConstraints(lblnumaula[i - 1], 0, i);
+                        gridPane.setMargin(lblnumaula[i - 1], new Insets(4));
+                        gridPane.getChildren().addAll(lblnumaula[i - 1]);
+                        c++;
+
+                }
             }
         }
+        System.out.println(c);
     }
 
     public void ColocarBotoesTransparente(){
 
 
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 botoes[i][a] = new Button();
                 botoes[i][a].setCursor(HAND);
@@ -579,7 +595,7 @@ public class Controller implements Initializable {
         tamanho = "botao";
         tamanhoquadrado = "botaoquadrado";
 
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
 
                 if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
@@ -600,7 +616,7 @@ public class Controller implements Initializable {
     public void DeixarBotoesGrandes(){
         tamanho = "botaogrande";
         tamanhoquadrado = "botaoquadradogrande";
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
                     botoes[i][a].getStyleClass().setAll("botaogrande");
@@ -619,7 +635,7 @@ public class Controller implements Initializable {
     public void DeixarBotoesMedios(){
         tamanho = "botaomedio";
         tamanhoquadrado = "botaoquadradomedio";
-        for (int i = 1; i < numAula.length + 1; i++) {
+        for (int i = 1; i < numLinhas; i++) {
             for (int a = 1; a < salas.length; a++) {
                 //botoes[i][a].getStyleClass().clear();
                 if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
@@ -643,8 +659,8 @@ public class Controller implements Initializable {
     }
     // ---- Gerar PDF ----
     private void GerarPDF(){
+        int limiteAula = (8);
 
-        int numberOfTables = (matrizcontrole.length -1) / 8;
 
 
 //        PdfPTable[] tables = new PdfPTable[];
@@ -656,9 +672,9 @@ public class Controller implements Initializable {
         float[] widths = new float[salas.length];
         PdfPCell whiteCells;
 
-        PdfPCell[][] corpo = new PdfPCell[numAula.length + 1][salas.length];
+        PdfPCell[][] corpo = new PdfPCell[numLinhas][salas.length];
         int fontSize = 8;
-        PdfPTable[] pdfPTables = new PdfPTable[numAula.length/8];
+        PdfPTable[] pdfPTables = new PdfPTable[numLinhas/8];
 
 
 
@@ -682,31 +698,141 @@ public class Controller implements Initializable {
                         pdfPTables[k].addCell(cabecalho[i]);
                     }
                 }
+                switch (k){
+                    case 0:
+                        for (int i = 1; i < (limiteAula) + 1; i++) {
+                        for (int j = 0; j < salas.length; j++) {
 
-                for (int i = 1; i < (numAula.length / 5) + 1; i++) {
-                    for (int j = 0; j < salas.length; j++) {
 
-
-                        if (j == 0) {
-                            corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                            corpo[i][j].setFixedHeight(12);
-                            pdfPTables[k].addCell(corpo[i][j]);
-                        } else {
-                            if (matrizcontrole[i][j] != 0) {
-                                corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                            if (j == 0) {
+                                corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                                 corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
                                 corpo[i][j].setFixedHeight(12);
                                 pdfPTables[k].addCell(corpo[i][j]);
                             } else {
-                                corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                corpo[i][j].setFixedHeight(12);
-                                pdfPTables[k].addCell(corpo[i][j]);
+                                if (matrizcontrole[i][j] != 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                } else {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                }
                             }
                         }
                     }
+                        break;
+                    case 1:
+                        for (int i = 1 + limiteAula; i < (limiteAula * 2) + 1 ; i++) {
+                            for (int j = 0; j < salas.length; j++) {
+
+
+                                if (j == 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                } else {
+                                    if (matrizcontrole[i][j] != 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    } else {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case 2:
+                        for (int i = 1 + limiteAula * 2; i < (limiteAula * 3) + 1 ; i++) {
+                            for (int j = 0; j < salas.length; j++) {
+
+
+                                if (j == 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                } else {
+                                    if (matrizcontrole[i][j] != 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    } else {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case 3:
+                        for (int i = 1 + limiteAula * 3; i < (limiteAula * 4) + 1 ; i++) {
+                            for (int j = 0; j < salas.length; j++) {
+
+
+                                if (j == 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                } else {
+                                    if (matrizcontrole[i][j] != 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    } else {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case 4:
+                        for (int i = 1 + limiteAula * 4; i < (limiteAula * 5) + 1 ; i++) {
+                            for (int j = 0; j < salas.length; j++) {
+
+
+                                if (j == 0) {
+                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                    corpo[i][j].setFixedHeight(12);
+                                    pdfPTables[k].addCell(corpo[i][j]);
+                                } else {
+                                    if (matrizcontrole[i][j] != 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    } else {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        corpo[i][j].setFixedHeight(12);
+                                        pdfPTables[k].addCell(corpo[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
+
+
+
                 doc.add(pdfPTables[k]);
 
 
