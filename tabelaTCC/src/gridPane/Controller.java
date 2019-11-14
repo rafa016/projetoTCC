@@ -282,8 +282,7 @@ public class Controller implements Initializable {
                 }
             }
         }
-        System.out.println();
-        System.out.println();
+
     }
     public void DeixarQuadrado() {
 
@@ -667,10 +666,7 @@ public class Controller implements Initializable {
         Document doc = new Document(PageSize.A4.rotate(), 0, 0, 20, 20);
 
 
-        int controlWhiteCells = 0;
         PdfPCell[] cabecalho = new PdfPCell[salas.length];
-        float[] widths = new float[salas.length];
-        PdfPCell whiteCells;
 
         PdfPCell[][] corpo = new PdfPCell[numLinhas][salas.length];
         int fontSize = 8;
