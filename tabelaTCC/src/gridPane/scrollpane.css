@@ -1,34 +1,27 @@
-.scroll-pane > .viewport {
-
+ .scroll-pane > .viewport {
  -fx-background-color: #FFFFFF;
-
  }
- .scroll-bar:vertical .track{
 
+ .scroll-bar:vertical .track{
  -fx-background-color: #FFFFFF;
  }
 
  .scroll-bar:horizontal .track{
-
-  -fx-background-color: #FFFFFF;
-
+ -fx-background-color: #FFFFFF;
  }
+
  .scroll-bar:horizontal .thumb{
-
  -fx-background-color: #DCDCDC ;
-
  }
 
  .scroll-bar:vertical .thumb{
-
  -fx-background-color: #DCDCDC;
-
  }
-.scroll-pane{
--fx-background-color: white;
 
+ .scroll-pane{
+ -fx-background-color: white;
 }
 
  .scroll-pane > .corner {
- -fx-background-color: white;
+  -fx-background-color: white;
  }

@@ -1,15 +1,10 @@
 package gridPane;
 
-
-
-
 import com.google.gson.Gson;
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.sun.javafx.scene.layout.region.Margins;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,21 +18,17 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
-
-import javax.print.Doc;
-import javax.swing.*;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Timer;
 
 
 import static javafx.scene.Cursor.HAND;
@@ -46,49 +37,50 @@ import static javafx.scene.Cursor.HAND;
 public class Controller implements Initializable {
 
     @FXML GridPane gridPane;
-    @FXML Button botaoApagar;
+    @FXML Button deleteButton;
     @FXML GridPane gridPaneModelo;
-    @FXML Label labelerro;
+    @FXML Label labelErro;
     @FXML ScrollPane scroll;
     @FXML ScrollPane scroll2;
-    @FXML AnchorPane anchorprincipal;
-    @FXML MenuItem menupequeno;
-    @FXML MenuItem menugrande;
-    @FXML MenuItem menumedio;
-    @FXML MenuButton menubotao;
-    @FXML Button salvar;
-    @FXML Button ler;
+    @FXML AnchorPane principalAnchor;
+    @FXML MenuItem smallMenu;
+    @FXML MenuItem mediumMenu;
+    @FXML MenuItem bigMenu;
+    @FXML MenuButton menuButton;
+    @FXML Button saveButton;
+    @FXML Button printButton;
 
 
-    public String[] salas = /*new String[41];*/{
-            " ", "1E", "1Q", "1I", "1A", "1B", "1C", "2E", "2Q", "2I","2A", "2B", "2C", "3E", "3Q", "3I","3A", "3B", "3C",
+    public String[] Salas = /*new String[41];*/{
+            " ","1E", "1Q", "1I", "1A", "1B", "1C", "2E", "2Q", "2I","2A", "2B", "2C", "3E", "3Q", "3I","3A", "3B", "3C",
     };
-    private String[] professores = {
-            "Rubens", "Giu", "Robertop", "Soninha", "Teté", "Thiago"
+    private String[] Professores = {
+            "Rubens", "Giu", "Robertop", "Sonia", "Teté", "Thiago", "Bolsonaro"
     };
     private String[] numAula = /*new String[28];*/ {
-            "1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8", "1", "2", "3", "4", "5", "6", "7", "8", "1", "2", "3", "4", "5", "6", "7", "8"
+            "1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8","1", "2", "3", "4", "5", "6", "7", "8"
     };
 
-    private boolean[] tecnico = { false, true, true, true, false, false, false};
-    private Node botao, botao2;
-    private int c = 0, control, a, b, id, idtroca1, idtroca2, idcontroleigual1, idcontroleigual2, delBusy = 0, numLinhas = numAula.length + (numAula.length/8);
-    private Button[] botoesmodelo = new Button[6];
+    private Node firstClickButton, secondClickButton;
+    private int c, control, row, column, teacherID, firstClickButtonID, secondClickButtonID, firstControlEqual, secondControlEqual, numberFontSize, delBusy, numberLines = numAula.length + (numAula.length/8);
+    private Button[] styleButton = new Button[7];
+    private Button[][] bodyButtons = new Button[numberLines][Salas.length];
+    private Label[] lblNumAula = new Label[numberLines];
+    private Label[] lblClass = new Label[Salas.length];
+    private Label[] lblTeachers = new Label[styleButton.length];
+    private int[][] controlMatrix = new int[numberLines][Salas.length];
+    private int[][] controlEqualMatrix = new int[numberLines][Salas.length];
+    private int[] idModelos= new int[styleButton.length];
 
-    private Button[][] botoes = new Button[numLinhas][salas.length];
-    private Label[] lblnumaula = new Label[numLinhas];
-    private Label[] lblsala = new Label[salas.length];
-    private Label[] lblprofessores = new Label[botoesmodelo.length];
-    private int[][] matrizcontrole = new int[numLinhas][salas.length];
-    private int[][] matrizcontroleigual = new int[numLinhas][salas.length];
-    private int[] idmodelos= new int[botoesmodelo.length];
-    private String estilo, tamanho = "botao", tamanhoquadrado = "botaoquadrado";
+    private String style, size = "SmallButton", squareSize = "SquareSmallButton";
     boolean delPressed = false, trocando = false, pegandoModelo = false;
+    private Stage stage = new Stage();
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    ToastNotification toast = new ToastNotification();
 
 
-    boolean ocupado = false;
+    boolean busy = false;
     DropShadow dp = new DropShadow();
 
     String[] styles = {
@@ -100,26 +92,26 @@ public class Controller implements Initializable {
             "-fx-background-color: #FFD700; -fx-border-color: #5A0082;",
             "-fx-background-color: #BC8F8F; -fx-border-color: #FF69B4;",
             "-fx-background-color: #FF0000; -fx-border-color: #FF0000;",
-
     };
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        SetarEstiloPadrao();
-        ColocarSalas();
-        ColocarAulas();
-        ColocarBotoesTransparente();
-        ColocarBotoesProfessores();
-        ColocarNomesProfessores();
+        setPatternStyle();
+        addClassRoom();
+        addNumberClasses();
+        addTransparentButton();
+        addTeacherButton();
+        addTeachersNames();
+        autoSave();
 
         gridPane.getChildren().forEach(item -> {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    TrocarBotoes(item);
-                    CompararBotoes();
-                    DeixarQuadrado();
+                    ChangeButtons(item);
+                    CompareButtons();
+                    setSquareStyle();
                 }
             });
         });
@@ -127,40 +119,33 @@ public class Controller implements Initializable {
             item.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                   ColocarProfessorTabelaPrincipal(item);
+                    addButtonsInBodyTable(item);
                 }
             });
         });
 
-        menupequeno.setOnAction(event -> {
-            DeixarBotoesPequenos();
+        smallMenu.setOnAction(event -> {
+            setSmallStyle();
         });
-        menugrande.setOnAction(event -> {
-            DeixarBotoesGrandes();
+        mediumMenu.setOnAction(event -> {
+            setMediumStyle();
         });
-        menumedio.setOnAction(event -> {
-            DeixarBotoesMedios();
+        bigMenu.setOnAction(event -> {
+            setBigStyle();
         });
-        salvar.setOnAction(event -> {
-            CriarPasta();
-            EscreverJSONTabela();
-            EscreverJSONModelo();
-            EscreverJSONCores();
-            EscreverJSONNomes();
-            EscreverJSONSalas();
-            EscreverJSONQNTSalas();
-        });
-        ler.setOnAction(event -> {
-            /*for(int i = 1; i < matrizcontroleigual.length; i++){
-                System.out.println();
-                for(int j = 1; j < matrizcontroleigual[0].length; j++){
-                    System.out.print(" " +matrizcontroleigual[i][j] + " ");
-                }
-            }*/
-            GerarPDF();
-        });
+        saveButton.setOnAction(event -> {
+            createFile();
+            WriteJSONGridPane();
+            writeJSONmodel();
+            writeJSONcolors();
+            writeJSONnames();
+            writeJSONclassrooms();
+            writeJSONclasses();
+            toastNotification();
 
-        anchorprincipal.setOnKeyPressed(event ->  {
+
+        });
+        principalAnchor.setOnKeyPressed(event ->  {
 
 
 
@@ -171,17 +156,17 @@ public class Controller implements Initializable {
             }
             if(delPressed & delBusy == 0){
 
-                ApagarBotao();
+                deleteButton();
 
             }
             delBusy += 1;
 
         });
-        anchorprincipal.setOnKeyReleased(event -> {
+        principalAnchor.setOnKeyReleased(event -> {
             if(event.getCode() == KeyCode.DELETE){
 
                 delPressed = false;
-                ApagarBotao();
+                deleteButton();
                 delBusy = 0;
 
 
@@ -189,117 +174,110 @@ public class Controller implements Initializable {
 
 
         });
+        printButton.setOnAction(event -> {
+
+            GerarPDF();
+        });
     }
 
-
-
-    public void PegarEstiloProfessor(Node item) {
-
-        if(botaoApagar.getEffect() == null) {
-
-            for (Node botao : gridPaneModelo.getChildren()) {
-                if (gridPaneModelo.getRowIndex(item) == gridPaneModelo.getRowIndex(botao)) {
-
+    public void getTeachersStyle(Node item) {
+        if (deleteButton.getEffect() == null) {
+            for (Node button : gridPaneModelo.getChildren()) {
+                if (gridPaneModelo.getRowIndex(item) == gridPaneModelo.getRowIndex(button)) {
                     DropShadow dp = new DropShadow();
-                    estilo = item.getStyle();
+                    style = item.getStyle();
                     dp.setHeight(30);
                     dp.setWidth(30);
                     dp.setSpread(0.21);
                     dp.setColor(Color.BLUE);
                     item.setEffect(dp);
-
-
                 } else {
-                    botao.setEffect(null);
-
+                    button.setEffect(null);
                 }
             }
-
         }
-
     }
-    public void ColocarProfessorTabelaPrincipal(Node item){
+    public void addButtonsInBodyTable(Node item){
         if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
-            if(ocupado == true){
+            if(busy == true){
                 if(item.getEffect() != null){
                     item.setEffect(null);
-                    ocupado = false;
+                    busy = false;
                     pegandoModelo = false;
                 }else{
-                    PegarEstiloProfessor(item);
-                    id = Integer.parseInt(item.getId());
+                    getTeachersStyle(item);
+                    teacherID = Integer.parseInt(item.getId());
                 }
             }else{
-                PegarEstiloProfessor(item);
-                id = Integer.parseInt(item.getId());
-                ocupado = true;
+                getTeachersStyle(item);
+                teacherID = Integer.parseInt(item.getId());
+                busy = true;
                 pegandoModelo = true;
             }
         }
-
     }
 
-    public boolean ApagarBotao() {
+    public boolean deleteButton() {
         if (pegandoModelo == false) {
             if (trocando == false) {
-                if (ocupado == true) {
-                    botaoApagar.setEffect(null);
-                    estilo = null;
-                    ocupado = false;
+                if (busy == true) {
+                    deleteButton.setEffect(null);
+                    style = null;
+                    busy = false;
                 } else {
                     DropShadow dp = new DropShadow();
-                    estilo = "-fx-background-color: #FFFFFF ;-fx-border-color: #FFFFFF; id:0";
+                    style = "-fx-background-color: #FFFFFF ;-fx-border-color: #FFFFFF; id:0";
                     dp.setHeight(30);
                     dp.setWidth(30);
                     dp.setSpread(0.21);
                     dp.setColor(Color.BLUE);
-                    botaoApagar.setEffect(dp);
-                    ocupado = true;
+                    deleteButton.setEffect(dp);
+                    busy = true;
                 }
             } else {
 
 
             }
         }
-        return ocupado;
+        return busy;
     }
 
-    public void CompararBotoes() {
+    public void CompareButtons() {
 
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                matrizcontroleigual[i][a] = 0;
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                controlEqualMatrix[i][a] = 0;
             }
         }
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                for (int c = a + 1; c < salas.length; c++) {
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                for (int c = a + 1; c < Salas.length; c++) {
                     //System.out.println(i + "" + a + "   " + i+ ""+ c);
-                    if (matrizcontrole[i][a] == matrizcontrole[i][c] && matrizcontrole[i][a] != 0 && matrizcontrole[i][c] != 0 && a != c) {
-                        matrizcontroleigual[i][a] = 1;
-                        matrizcontroleigual[i][c] = 1;
+                    if (controlMatrix[i][a] == controlMatrix[i][c] && controlMatrix[i][a] != 0 && controlMatrix[i][c] != 0 && a != c) {
+                        controlEqualMatrix[i][a] = 1;
+                        controlEqualMatrix[i][c] = 1;
                     }
                 }
             }
         }
 
     }
-    public void DeixarQuadrado() {
+    public void setSquareStyle() {
 
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                if (matrizcontroleigual[i][a] == 1) {
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                if (controlEqualMatrix[i][a] == 1) {
                     for (Node node : gridPane.getChildren()) {
-                        if (gridPane.getRowIndex(node) == null) {
-                        } else if (gridPane.getRowIndex(node) == i && gridPane.getColumnIndex(node) == a) {
-                            node.getStyleClass().setAll(tamanhoquadrado);
+                        if (GridPane.getRowIndex(node) == null) {
+                        } else if (GridPane.getRowIndex(node) == i && GridPane.getColumnIndex(node) == a) {
+                            node.getStyleClass().setAll(squareSize);
                         }
                     }
                 }else{
                     for (Node node : gridPane.getChildren()) {
-                        if (gridPane.getRowIndex(node) == null) {
-                        } else if (gridPane.getRowIndex(node) == i && gridPane.getColumnIndex(node) == a) {
-                            node.getStyleClass().setAll(tamanho);
+                        if (GridPane.getRowIndex(node) == null) {
+                        } else if (GridPane.getRowIndex(node) == i && GridPane.getColumnIndex(node) == a) {
+                            node.getStyleClass().setAll(size);
                         }
                     }
                 }
@@ -307,123 +285,130 @@ public class Controller implements Initializable {
 
         }
     }
-    public void TrocarBotoes(Node item){
-
-
-
+    public void ChangeButtons(Node item){
         if(String.valueOf(item.getClass()).equals( "class javafx.scene.control.Button")) {
 
-            if (ocupado == true) {
-                item.getStyleClass().setAll(tamanho);
-                item.setStyle(estilo);
-                matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = id;
-                if (botaoApagar.getEffect() != null) {
-                    matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
-                    matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
+            if (busy == true) {
+                item.getStyleClass().setAll(size);
+                item.setStyle(style);
+                controlMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = teacherID;
+                if (deleteButton.getEffect() != null) {
+                    controlMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
+                    controlEqualMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = 0;
                 }
             } else {
                 if (control == 1) {
-                    if (GridPane.getColumnIndex(item) == b) {
-                        botao2 = item;
-                        idtroca2 = matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
-                        idcontroleigual2 = matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
-                        matrizcontrole[a][b] = idtroca2;
-                        matrizcontroleigual[a][b] = idcontroleigual2;
-                        matrizcontrole[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idtroca1;
-                        matrizcontroleigual[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = idcontroleigual1;
-                        GridPane.setConstraints(botao, GridPane.getColumnIndex(item), GridPane.getRowIndex(item));
-                        GridPane.setConstraints(botao2, b, a);
-                        botao2.setEffect(null);
-                        botao.setEffect(null);
-                        labelerro.setVisible(false);
+                    if (GridPane.getColumnIndex(item) == column) {
+                        secondClickButton = item;
+                        secondClickButtonID = controlMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
+                        secondControlEqual = controlEqualMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)];
+                        controlMatrix[row][column] = secondClickButtonID;
+                        controlEqualMatrix[row][column] = secondControlEqual;
+                        controlMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = firstClickButtonID;
+                        controlEqualMatrix[GridPane.getRowIndex(item)][GridPane.getColumnIndex(item)] = firstControlEqual;
+                        gridPane.setConstraints(firstClickButton, GridPane.getColumnIndex(item), GridPane.getRowIndex(item));
+                        gridPane.setConstraints(secondClickButton, column, row);
+                        secondClickButton.setEffect(null);
+                        firstClickButton.setEffect(null);
+                        labelErro.setVisible(false);
                         control = 0;
-                        trocando = false;
                     } else {
                         item.setEffect(null);
-                        botao.setEffect(null);
+                        firstClickButton.setEffect(null);
                         control = 0;
-                        labelerro.setVisible(true);
-                        trocando = false;
+                        labelErro.setVisible(true);
                     }
                 } else {
-                    a = GridPane.getRowIndex(item);
-                    b = GridPane.getColumnIndex(item);
-                    botao = item;
-                    idtroca1 = matrizcontrole[a][b];
-                    idcontroleigual1 = matrizcontroleigual[a][b];
+                    row = GridPane.getRowIndex(item);
+                    column = GridPane.getColumnIndex(item);
+                    firstClickButton = item;
+                    firstClickButtonID = controlMatrix[row][column];
+                    firstControlEqual = controlEqualMatrix[row][column];
                     control = 1;
                     dp.setSpread(0.30);
                     dp.setColor(Color.DARKRED);
                     item.setEffect(dp);
-                    trocando = true;
                 }
             }
         }
-
     }
 
 // ---- Montar a tabela principal ----
 
-    public void ColocarSalas() {
-        for (int a = 1; a < salas.length; a++) {
-            lblsala[a] = new Label();
-            lblsala[a].setText(salas[a]);
-            lblsala[a].setMinWidth(30);
-            lblsala[a].setAlignment(Pos.CENTER);
-            gridPane.setConstraints(lblsala[a], a, 0);
-            gridPane.setMargin(lblsala[a], new Insets(4));
-            gridPane.getChildren().add(lblsala[a]);
+    public void addClassRoom() {
+        for (int a = 1; a < Salas.length; a++) {
+            lblClass[a] = new Label();
+            lblClass[a].setText(Salas[a]);
+            lblClass[a].setMinWidth(30);
+            lblClass[a].setAlignment(Pos.CENTER);
+            gridPane.setConstraints(lblClass[a], a, 0);
+            gridPane.setMargin(lblClass[a], new Insets(4));
+            gridPane.getChildren().add(lblClass[a]);
         }
     }
-    public void ColocarAulas(){
+    public void addNumberClasses(){
 
-        for (int i = 1; i <= numLinhas; i++) {
+        for (int i = 1; i <= numberLines; i++) {
             for (int a = 0; a < 1; a++) {
                 if(i % 9 == 0){
-                    lblnumaula[i - 1] = new Label();
+                    lblNumAula[i - 1] = new Label();
 
-                    lblnumaula[i - 1].setStyle("-fx-font-size: 8px;");
-                    lblnumaula[i - 1].setAlignment(Pos.CENTER);
-                    gridPane.setConstraints(lblnumaula[i - 1], 0, i);
-                    gridPane.setMargin(lblnumaula[i - 1], new Insets(4));
-                    gridPane.getChildren().addAll(lblnumaula[i - 1]);
+                    lblNumAula[i - 1].setStyle("-fx-font-size: 8px;");
+                    lblNumAula[i - 1].setAlignment(Pos.CENTER);
+                    gridPane.setConstraints(lblNumAula[i - 1], 0, i);
+                    gridPane.setMargin(lblNumAula[i - 1], new Insets(4));
+                    gridPane.getChildren().addAll(lblNumAula[i - 1]);
 
                 }else {
 
-                        lblnumaula[i - 1] = new Label();
-                        lblnumaula[i - 1].setText(numAula[c]);
-                        lblnumaula[i - 1].setStyle("-fx-font-size: 8px;");
-                        lblnumaula[i - 1].setAlignment(Pos.CENTER);
-                        gridPane.setConstraints(lblnumaula[i - 1], 0, i);
-                        gridPane.setMargin(lblnumaula[i - 1], new Insets(4));
-                        gridPane.getChildren().addAll(lblnumaula[i - 1]);
-                        c++;
+                    lblNumAula[i - 1] = new Label();
+                    lblNumAula[i - 1].setText(numAula[c]);
+                    lblNumAula[i - 1].setStyle("-fx-font-size: 8px;");
+                    lblNumAula[i - 1].setAlignment(Pos.CENTER);
+                    gridPane.setConstraints(lblNumAula[i - 1], 0, i);
+                    gridPane.setMargin(lblNumAula[i - 1], new Insets(4));
+                    gridPane.getChildren().addAll(lblNumAula[i - 1]);
+                    c++;
 
                 }
             }
         }
-        System.out.println(c);
     }
 
-    public void ColocarBotoesTransparente(){
+    public void addTransparentButton(){
 
+        Rectangle[] blackrecs = new Rectangle[Salas.length];
 
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                botoes[i][a] = new Button();
-                botoes[i][a].setCursor(HAND);
-                botoes[i][a].getStyleClass().setAll("botao");
-                if(matrizcontrole[i][a] != 0){
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                if(i % 9 == 0){
 
-                    botoes[i][a].setStyle(styles[matrizcontrole[i][a]]);
+                    blackrecs[a] = new Rectangle();
+                    blackrecs[a].setHeight(20);
+                    blackrecs[a].setWidth(40);
+                    blackrecs[a].setFill(Color.GRAY);
+                    gridPane.setConstraints(blackrecs[a], a, i);
+
+                    gridPane.getChildren().addAll(blackrecs[a]);
 
                 }else{
-                    botoes[i][a].setStyle(styles[0]);
-                    matrizcontroleigual[i][a] = 0;
+                    bodyButtons[i][a] = new Button();
+                    bodyButtons[i][a].setCursor(HAND);
+                    bodyButtons[i][a].getStyleClass().setAll("SmallButton");
+                    if(controlMatrix[i][a] != 0){
+
+                        bodyButtons[i][a].setStyle(styles[controlMatrix[i][a]]);
+
+                    }else{
+                        bodyButtons[i][a].setStyle(styles[0]);
+                        controlEqualMatrix[i][a] = 0;
+                    }
+                    gridPane.setConstraints(bodyButtons[i][a], a, i);
+                    gridPane.setMargin(bodyButtons[i][a], new Insets(4));
+                    gridPane.getChildren().addAll(bodyButtons[i][a]);
                 }
-                gridPane.setConstraints(botoes[i][a], a, i);
-                gridPane.setMargin(botoes[i][a], new Insets(4));
-                gridPane.getChildren().addAll(botoes[i][a]);
+
+
 
             }
         }
@@ -432,55 +417,57 @@ public class Controller implements Initializable {
     // ---- Fim Tabela Principal ----
 
     // ---- Montar a tabela Professores ----
-    public void ColocarBotoesProfessores(){
+    public void addTeacherButton(){
         int c = 1;
         for (int i = 0; i < 1; i++) {
-            for (int a = 0; a < botoesmodelo.length; a++) {
-                botoesmodelo[a] = new Button();
-                botoesmodelo[a].setCursor(HAND);
-                botoesmodelo[a].getStyleClass().add("botao");
-                botoesmodelo[a].setStyle(styles[c]);
-                botoesmodelo[a].setId(String.valueOf(a + 1));
-                idmodelos[a] = a + 1;
-                gridPaneModelo.setConstraints(botoesmodelo[a], 0, a);
-                gridPane.setMargin(botoesmodelo[a], new Insets(4));
-                gridPaneModelo.getChildren().add(botoesmodelo[a]);
+            for (int a = 0; a < styleButton.length; a++) {
+                styleButton[a] = new Button();
+                styleButton[a].setCursor(HAND);
+                styleButton[a].getStyleClass().add("SmallButton");
+                styleButton[a].setStyle(styles[c]);
+                styleButton[a].setId(String.valueOf(a + 1));
+                idModelos[a] = a + 1;
+                gridPaneModelo.setConstraints(styleButton[a], 0, a);
+                gridPane.setMargin(styleButton[a], new Insets(4));
+                gridPaneModelo.getChildren().add(styleButton[a]);
 
                 c++;
             }
         }
     }
 
-    public void ColocarNomesProfessores(){
+    public void addTeachersNames(){
         for (int i = 0; i < 1; i++) {
-            for (int a = 0; a < botoesmodelo.length; a++) {
-                lblprofessores[a] = new Label();
-                lblprofessores[a].setText(professores[a]);
-                gridPaneModelo.setConstraints(lblprofessores[a], 1, a);
-                gridPane.setMargin(lblprofessores[a], new Insets(4));
-                gridPaneModelo.getChildren().add(lblprofessores[a]);
+            for (int a = 0; a < styleButton.length; a++) {
+                lblTeachers[a] = new Label();
+                lblTeachers[a].setText(Professores[a]);
+                gridPaneModelo.setConstraints(lblTeachers[a], 1, a);
+                gridPane.setMargin(lblTeachers[a], new Insets(4));
+                gridPaneModelo.getChildren().add(lblTeachers[a]);
             }
         }
-
     }
     // ---- Fim Tabela Professores ----
 
-    public void SetarEstiloPadrao(){
-        anchorprincipal.getStylesheets().add(getClass().getResource("botao.css").toExternalForm());
+    public void setPatternStyle(){
+        principalAnchor.getStylesheets().add(getClass().getResource("button.css").toExternalForm());
         scroll.getStylesheets().add(getClass().getResource("scrollpane.css").toExternalForm());
         scroll2.getStylesheets().add(getClass().getResource("scrollpane.css").toExternalForm());
         gridPane.setGridLinesVisible(true);
-        salvar.getStyleClass().add("botaoapagar");
-        botaoApagar.getStyleClass().add("botaoapagar");
-        botaoApagar.setId(String.valueOf(0));
+        saveButton.setFocusTraversable(false);
+        deleteButton.setFocusTraversable(false);
+        printButton.setFocusTraversable(false);
+        //save.getStyleClass().add("DeleteButton");
+        //deleteButton.getStyleClass().add("DeleteButton");
+        deleteButton.setId(String.valueOf(0));
 
     }
     // ---- Inicio JSON ----
-    private void EscreverJSONTabela(){
+    private void WriteJSONGridPane(){
         Gson gson = new Gson();
         FileWriter writeFile = null;
         try{
-            String jsonTabela = gson.toJson(matrizcontrole);
+            String jsonTabela = gson.toJson(controlMatrix);
 
             writeFile = new FileWriter("backup " +  date + "\\tabelaprincipal.json");
             writeFile.write(
@@ -491,40 +478,12 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    public void LerArquivoJSON() {
-        Gson gson = new Gson();
-        int c = 0;
-        String[][] jsonTabelaPrincipal;
-        String[] jsonNomes;
-        String[] jsonEstilos;
-        String[] jsonSalas;
-        String[] jsonNumAulas;
 
-        try {
-            jsonTabelaPrincipal = gson.fromJson(new FileReader("backup " +  date + "\\tabelaprincipal.json"), String[][].class);
-            JOptionPane.showMessageDialog(null, jsonTabelaPrincipal);
-
-            jsonNomes = gson.fromJson(new FileReader("backup " +  date + "\\nomes.json"), String[].class);
-            JOptionPane.showMessageDialog(null, jsonNomes);
-
-            jsonEstilos = gson.fromJson(new FileReader("backup " +  date + "\\estilos.json"), String[].class);
-            JOptionPane.showMessageDialog(null, jsonEstilos);
-
-            jsonSalas = gson.fromJson(new FileReader("backup " +  date + "\\salas.json"), String[].class);
-            JOptionPane.showMessageDialog(null, jsonSalas);
-
-            jsonNumAulas  = gson.fromJson(new FileReader("backup " +  date + "\\qntsalas.json"), String[].class);
-            JOptionPane.showMessageDialog(null, jsonNumAulas);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    private void EscreverJSONModelo(){
+    private void writeJSONmodel(){
         Gson gson  = new Gson();
         FileWriter writeFile = null;
         try{
-            String gsonModelos = gson.toJson(idmodelos);
+            String gsonModelos = gson.toJson(idModelos);
             writeFile = new FileWriter("backup " +  date + "\\idmodelo.json");
             writeFile.write(gsonModelos);
             writeFile.close();
@@ -533,7 +492,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    private void EscreverJSONCores(){
+    private void writeJSONcolors(){
         Gson gson = new Gson();
         FileWriter writeFile = null;
         String jsonCoes = gson.toJson(styles);
@@ -546,10 +505,10 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    private void EscreverJSONNomes(){
+    private void writeJSONnames(){
         Gson gson = new Gson();
         FileWriter writeFile = null;
-        String jsonNomes = gson.toJson(professores);
+        String jsonNomes = gson.toJson(Professores);
         try{
             writeFile = new FileWriter("backup " +  date + "\\nomes.json");
             writeFile.write(jsonNomes);
@@ -559,10 +518,10 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    private void EscreverJSONSalas(){
+    private void writeJSONclassrooms(){
         Gson gson = new Gson();
         FileWriter writeFile = null;
-        String jsonsalas = gson.toJson(salas);
+        String jsonsalas = gson.toJson(Salas);
         try{
             writeFile = new FileWriter("backup " +  date + "\\salas.json");
             writeFile.write(jsonsalas);
@@ -572,7 +531,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
-    private void EscreverJSONQNTSalas() {
+    private void writeJSONclasses() {
         Gson gson = new Gson();
         FileWriter writeFile = null;
         String jsonNumAula = gson.toJson(numAula);
@@ -589,88 +548,108 @@ public class Controller implements Initializable {
 
     // ---- Menu do Tamanho dos Botoes ----
 
-    public void DeixarBotoesPequenos(){
+    public void setSmallStyle(){
 
-        tamanho = "botao";
-        tamanhoquadrado = "botaoquadrado";
+        size = "SmallButton";
+        squareSize = "SquareSmallButton";
+        numberFontSize = 10;
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
 
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-
-                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                    botoes[i][a].getStyleClass().setAll("botao");
+                if(String.valueOf(bodyButtons[i][a].getStyleClass()) == "SmallButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) == "BigButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) =="MediumButton"){
+                    bodyButtons[i][a].getStyleClass().setAll("SmallButton");
                 }else{
-                    botoes[i][a].getStyleClass().setAll("botaoquadrado");
+                    bodyButtons[i][a].getStyleClass().setAll("SquareSmallButton");
                 }
             }
         }
         for (int i = 0; i < 1; i++) {
-            for (int a = 0; a < botoesmodelo.length; a++) {
-                botoesmodelo[a].getStyleClass().clear();
-                botoesmodelo[a].getStyleClass().add("botao");
+            for (int a = 0; a < styleButton.length; a++) {
+                styleButton[a].getStyleClass().clear();
+                styleButton[a].getStyleClass().add("SmallButton");
             }
+        }
+        for (int i = 0; i < lblNumAula.length; i++) {
+
+            lblNumAula[i].setStyle("-fx-font-size: " + numberFontSize+"px;");
+
         }
 
     }
-    public void DeixarBotoesGrandes(){
-        tamanho = "botaogrande";
-        tamanhoquadrado = "botaoquadradogrande";
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                    botoes[i][a].getStyleClass().setAll("botaogrande");
+    public void setBigStyle(){
+        size = "BigButton";
+        squareSize = "SquareBigButton";
+        numberFontSize = 14;
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                if(String.valueOf(bodyButtons[i][a].getStyleClass()) == "SmallButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) == "BigButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) =="MediumButton"){
+                    bodyButtons[i][a].getStyleClass().setAll("BigButton");
                 }else{
-                    botoes[i][a].getStyleClass().setAll("botaoquadradogrande");
+                    bodyButtons[i][a].getStyleClass().setAll("SquareBigButton");
                 }
             }
         }
         for (int i = 0; i < 1; i++) {
-            for (int a = 0; a < botoesmodelo.length; a++) {
-                botoesmodelo[a].getStyleClass().clear();
-                botoesmodelo[a].getStyleClass().add("botaogrande");
+            for (int a = 0; a < styleButton.length; a++) {
+                styleButton[a].getStyleClass().clear();
+                styleButton[a].getStyleClass().add("BigButton");
             }
+        }
+        for (int i = 0; i < lblNumAula.length; i++) {
+
+            lblNumAula[i].setStyle("-fx-font-size: " + numberFontSize+"px;");
+
         }
     }
-    public void DeixarBotoesMedios(){
-        tamanho = "botaomedio";
-        tamanhoquadrado = "botaoquadradomedio";
-        for (int i = 1; i < numLinhas; i++) {
-            for (int a = 1; a < salas.length; a++) {
-                //botoes[i][a].getStyleClass().clear();
-                if(String.valueOf(botoes[i][a].getStyleClass()) == "botao" || String.valueOf(botoes[i][a].getStyleClass()) == "botaogrande" || String.valueOf(botoes[i][a].getStyleClass()) =="botaomedio"){
-                    botoes[i][a].getStyleClass().setAll("botaomedio");
+    public void setMediumStyle(){
+        size = "MediumButton";
+        squareSize = "SquareMediumButton";
+        numberFontSize = 12;
+        for (int i = 1; i < numberLines; i++) {
+            for (int a = 1; a < Salas.length; a++) {
+                if(String.valueOf(bodyButtons[i][a].getStyleClass()) == "SmallButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) == "BigButton" || String.valueOf(bodyButtons[i][a].getStyleClass()) =="MediumButton"){
+                    bodyButtons[i][a].getStyleClass().setAll("MediumButton");
                 }else{
-                    botoes[i][a].getStyleClass().setAll("botaoquadradomedio");
+                    bodyButtons[i][a].getStyleClass().setAll("SquareMediumButton");
                 }
             }
         }
         for (int i = 0; i < 1; i++) {
-            for (int a = 0; a < botoesmodelo.length; a++) {
-                //botoesmodelo[a].getStyleClass().clear();
-                botoesmodelo[a].getStyleClass().setAll("botaomedio");
+            for (int a = 0; a < styleButton.length; a++) {
+                styleButton[a].getStyleClass().setAll("MediumButton");
             }
+        }
+        for (int i = 0; i < lblNumAula.length; i++) {
+
+            lblNumAula[i].setStyle("-fx-font-size: " + numberFontSize+"px;");
+
         }
     }
     // ---- Fim Menu Botoes ----
-    private void CriarPasta(){
-        File diretorio = new File("backup " + date );
-        diretorio.mkdir();
+    private void createFile(){
+        File directory = new File("backup " + date );
+        directory.mkdir();
     }
-    // ---- Gerar PDF ----
     private void GerarPDF(){
+        System.out.println(numAula.length);
+        System.out.println(numberLines);
+        int controlLines = 0;
         int limiteAula = (8);
 
 
 
-//        PdfPTable[] tables = new PdfPTable[];
+
         Document doc = new Document(PageSize.A4.rotate(), 0, 0, 20, 20);
 
 
-        PdfPCell[] cabecalho = new PdfPCell[salas.length];
+        int controlWhiteCells = 0;
+        PdfPCell[] cabecalho = new PdfPCell[Salas.length];
+        float[] widths = new float[Salas.length];
+        PdfPCell whiteCells;
 
-        PdfPCell[][] corpo = new PdfPCell[numLinhas][salas.length];
+        PdfPCell[][] corpo = new PdfPCell[numberLines][Salas.length];
         int fontSize = 8;
-        PdfPTable[] pdfPTables = new PdfPTable[numLinhas/8];
+        PdfPTable pdfPTable = new PdfPTable(Salas.length);
 
 
 
@@ -679,171 +658,70 @@ public class Controller implements Initializable {
 
             doc.open();
 
-           for(int k = 0; k < pdfPTables.length; k++) {
 
-                pdfPTables[k]  = new PdfPTable(salas.length);
-                for (int i = 0; i < salas.length; i++) {
+
+
+
+
+                for (int i = 0; i < Salas.length; i++) {
                     if (i == 0) {
                         cabecalho[i] = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
                         cabecalho[i].setFixedHeight(12);
-                        pdfPTables[k].addCell(cabecalho[i]);
+                        pdfPTable.addCell(cabecalho[i]);
                     } else {
-                        cabecalho[i] = new PdfPCell(new Paragraph(salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                        cabecalho[i] = new PdfPCell(new Paragraph(Salas[i], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                         cabecalho[i].setHorizontalAlignment(Element.ALIGN_CENTER);
                         cabecalho[i].setFixedHeight(12);
-                        pdfPTables[k].addCell(cabecalho[i]);
+                        pdfPTable.addCell(cabecalho[i]);
                     }
                 }
-                switch (k){
-                    case 0:
-                        for (int i = 1; i < (limiteAula) + 1; i++) {
-                        for (int j = 0; j < salas.length; j++) {
 
 
-                            if (j == 0) {
-                                corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                corpo[i][j].setFixedHeight(12);
-                                pdfPTables[k].addCell(corpo[i][j]);
-                            } else {
-                                if (matrizcontrole[i][j] != 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                } else {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                }
-                            }
-                        }
-                    }
-                        break;
-                    case 1:
-                        for (int i = 1 + limiteAula; i < (limiteAula * 2) + 1 ; i++) {
-                            for (int j = 0; j < salas.length; j++) {
-
-
-                                if (j == 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                } else {
-                                    if (matrizcontrole[i][j] != 0) {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                        for (int i = 1; i < numberLines  ; i++) {
+                            if(i % 9 != 0){
+                            for (int j = 0; j < Salas.length; j++) {
+                                    if (j == 0) {
+                                        corpo[i][j] = new PdfPCell(new Paragraph(numAula[controlLines], FontFactory.getFont(FontFactory.COURIER, fontSize)));
                                         corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
                                         corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
+                                        pdfPTable.addCell(corpo[i][j]);
                                     } else {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
+                                        if (controlMatrix[i][j] != 0) {
+                                            corpo[i][j] = new PdfPCell(new Paragraph(Professores[controlMatrix[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                            corpo[i][j].setFixedHeight(12);
+                                            pdfPTable.addCell(corpo[i][j]);
+                                        } else {
+                                            corpo[i][j] = new PdfPCell(new Paragraph(" "));
+                                            corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                            corpo[i][j].setFixedHeight(12);
+                                            pdfPTable.addCell(corpo[i][j]);
+                                        }
+                                    }
+                                }
+                                controlLines++;
+                            }else{
+                                for (int l = 0; l < Salas.length; l++) {
+                                    if (l == 0) {
+                                        cabecalho[l] = new PdfPCell(new Paragraph(" ", FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        cabecalho[l].setFixedHeight(12);
+                                        pdfPTable.addCell(cabecalho[l]);
+                                    } else {
+                                        cabecalho[l] = new PdfPCell(new Paragraph(Salas[l], FontFactory.getFont(FontFactory.COURIER, fontSize)));
+                                        cabecalho[l].setHorizontalAlignment(Element.ALIGN_CENTER);
+                                        cabecalho[l].setFixedHeight(12);
+                                        pdfPTable.addCell(cabecalho[l]);
                                     }
                                 }
                             }
+
                         }
-                        break;
-                    case 2:
-                        for (int i = 1 + limiteAula * 2; i < (limiteAula * 3) + 1 ; i++) {
-                            for (int j = 0; j < salas.length; j++) {
-
-
-                                if (j == 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                } else {
-                                    if (matrizcontrole[i][j] != 0) {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    } else {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 3:
-                        for (int i = 1 + limiteAula * 3; i < (limiteAula * 4) + 1 ; i++) {
-                            for (int j = 0; j < salas.length; j++) {
-
-
-                                if (j == 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                } else {
-                                    if (matrizcontrole[i][j] != 0) {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    } else {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 4:
-                        for (int i = 1 + limiteAula * 4; i < (limiteAula * 5) + 1 ; i++) {
-                            for (int j = 0; j < salas.length; j++) {
-
-
-                                if (j == 0) {
-                                    corpo[i][j] = new PdfPCell(new Paragraph(numAula[i - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                    corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                    corpo[i][j].setFixedHeight(12);
-                                    pdfPTables[k].addCell(corpo[i][j]);
-                                } else {
-                                    if (matrizcontrole[i][j] != 0) {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(professores[matrizcontrole[i][j] - 1], FontFactory.getFont(FontFactory.COURIER, fontSize)));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    } else {
-                                        corpo[i][j] = new PdfPCell(new Paragraph(" "));
-                                        corpo[i][j].setHorizontalAlignment(Element.ALIGN_CENTER);
-                                        corpo[i][j].setFixedHeight(12);
-                                        pdfPTables[k].addCell(corpo[i][j]);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                }
-
-
-
-                doc.add(pdfPTables[k]);
 
 
 
 
-            }
-
+                doc.add(pdfPTable);
             doc.close();
-
-
-
-
-
-
-
             Desktop.getDesktop().open(new File("Horario.pdf"));
 
         } catch (DocumentException e) {
@@ -856,14 +734,44 @@ public class Controller implements Initializable {
 
 
     }
+    public void toastNotification(){
+        int toastMsgTime = 1500;
+        int fadeInTime = 500;
+        int fadeOutTime= 500;
+        toast.makeText(stage, "Salvo com sucesso!!", toastMsgTime, fadeInTime, fadeOutTime);
+
+    }
+    public void autoSave(){
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask(){
+            boolean stageClosed;
+            @Override
+            public void run() {
+                principalAnchor.getScene().getWindow().setOnCloseRequest(event -> {
+                    stageClosed = true;
+
+
+                });
+                if (stageClosed){
+                    timer.cancel();
+                }
+                createFile();
+                WriteJSONGridPane();
+                writeJSONmodel();
+                writeJSONcolors();
+                writeJSONnames();
+                writeJSONclassrooms();
+                writeJSONclasses();
+
+
+
+            }
+        };
+        timer.scheduleAtFixedRate(task, 2000, 1000);
+
+
+    }
 
 
 }
-
-
-
-
-
-
-
-
