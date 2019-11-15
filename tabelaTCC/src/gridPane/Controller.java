@@ -5,6 +5,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +50,10 @@ public class Controller implements Initializable {
     @FXML MenuButton menuButton;
     @FXML Button saveButton;
     @FXML Button printButton;
+    @FXML Button lateralMenuButton;
+    @FXML Button AnchorPane;
+
+
 
 
     public String[] Salas = /*new String[41];*/{
@@ -62,7 +67,7 @@ public class Controller implements Initializable {
     };
 
     private Node firstClickButton, secondClickButton;
-    private int c, control, row, column, teacherID, firstClickButtonID, secondClickButtonID, firstControlEqual, secondControlEqual, numberFontSize, delBusy, numberLines = numAula.length + (numAula.length/8);
+    private int c, control, row, column, teacherID, firstClickButtonID, secondClickButtonID, firstControlEqual, secondControlEqual, numberFontSize, delBusy, numberLines = numAula.length + (numAula.length/8), lateralMenuSize = 1;
     private Button[] styleButton = new Button[7];
     private Button[][] bodyButtons = new Button[numberLines][Salas.length];
     private Label[] lblNumAula = new Label[numberLines];
@@ -73,7 +78,7 @@ public class Controller implements Initializable {
     private int[] idModelos= new int[styleButton.length];
 
     private String style, size = "SmallButton", squareSize = "SquareSmallButton";
-    boolean delPressed = false, trocando = false, pegandoModelo = false;
+    boolean delPressed = false, trocando = false, pegandoModelo = false, maxSizeLateralMenu;
     private Stage stage = new Stage();
 
     String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -177,6 +182,67 @@ public class Controller implements Initializable {
         printButton.setOnAction(event -> {
 
             GerarPDF();
+        });
+        lateralMenuButton.setOnAction(event -> {
+
+
+
+
+                Timer timer = new Timer();
+
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (lateralMenuSize == 170) {
+
+                            timer.cancel();
+                            principalAnchor.setLeftAnchor(scroll2, 10.0);
+                            principalAnchor.setLeftAnchor(scroll, 300.0);
+                            principalAnchor.setLeftAnchor(printButton, 200.0);
+                            principalAnchor.setLeftAnchor(saveButton, 200.0);
+                            principalAnchor.setLeftAnchor(deleteButton, 200.0);
+
+                            for (int i = 0; i < 1; i++) {
+                                for (int a = 0; a < styleButton.length; a++) {
+
+                                    styleButton[a].getStyleClass().setAll("SmallButton");
+
+
+                                    c++;
+                                }
+                            }
+                            maxSizeLateralMenu = true;
+
+
+                        } else if (lateralMenuSize == 0) {
+
+                            maxSizeLateralMenu = false;
+
+                            principalAnchor.setLeftAnchor(scroll2, -40.0);
+                            principalAnchor.setLeftAnchor(scroll, 130.0);
+                            principalAnchor.setLeftAnchor(printButton, 30.0);
+                            principalAnchor.setLeftAnchor(saveButton, 30.0);
+                            principalAnchor.setLeftAnchor(deleteButton, 30.0);
+                            timer.cancel();
+                        }
+
+                        if (maxSizeLateralMenu) {
+                            lateralMenuSize--;
+
+                        } else {
+                            lateralMenuSize++;
+                        }
+
+                        scroll2.setPrefWidth(lateralMenuSize);
+
+
+
+
+                    }
+                };
+                timer.scheduleAtFixedRate(task, 0, 2);
+
+
         });
     }
 
@@ -423,7 +489,7 @@ public class Controller implements Initializable {
             for (int a = 0; a < styleButton.length; a++) {
                 styleButton[a] = new Button();
                 styleButton[a].setCursor(HAND);
-                styleButton[a].getStyleClass().add("SmallButton");
+                styleButton[a].getStyleClass().add("Button1px");
                 styleButton[a].setStyle(styles[c]);
                 styleButton[a].setId(String.valueOf(a + 1));
                 idModelos[a] = a + 1;

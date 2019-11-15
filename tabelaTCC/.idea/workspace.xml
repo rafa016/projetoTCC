@@ -8,6 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="print and autosave implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Horario.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Horario.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/GridPaneView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tabelaTCC/gridPane/GridPaneView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gridPane/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridPane/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gridPane/GridPaneView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gridPane/GridPaneView.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573707685545</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="print and autosave implemented">
+      <created>1573707910641</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573707910641</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -240,6 +254,9 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../../.." />
+    </ignored-roots>
     <MESSAGE value="space between days fixed" />
     <MESSAGE value="print and autosave implemented" />
     <option name="LAST_COMMIT_MESSAGE" value="print and autosave implemented" />
