@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="710.0" maxWidth="1265.0" minHeight="710.0" minWidth="1265.0" prefHeight="710.0" prefWidth="1265.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfessoresController">
+    <children>
+        <AnchorPane focusTraversable="true" layoutX="10.0" layoutY="-7.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" layoutX="-11.0" layoutY="-1.0" prefHeight="786.0" prefWidth="242.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="125.0" maxWidth="228.0" minHeight="125.0" minWidth="228.0" prefHeight="125.0" prefWidth="228.0" text="Label" textFill="#27282a" />
+                        <JFXButton fx:id="btnTelaMenuInicial" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="316.0" text="  Menu Inicial" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_home_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSalas" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="322.0" text="  Salas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_google_classroom_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaMaterias" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="335.0" text="  Matérias" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_overview_pages_1_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaProfessores" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="337.0" style="-fx-background-color: #525355; -fx-border-color: #525355;" text="  Professores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_conference_background_selected_filled_50px_2.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaGradeEscolar" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" text="  Grade Escolar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_timetable_50px_1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSeguranca" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" text="  Segurança" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_keyhole_shield_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <Label prefHeight="248.0" prefWidth="343.0" text="Label" textFill="#27282a" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="720.0" prefWidth="11.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox layoutX="-22.0" layoutY="-50.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="126.0" minHeight="125.0" prefHeight="125.0" prefWidth="83.0" textFill="#27282a" />
+                        <Pane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="59.0" />
+                        <Pane prefHeight="50.0" prefWidth="58.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #20B2AA; -fx-border-color: #20B2AA;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <TabPane fx:id="tabPane" focusTraversable="false" layoutX="240.0" layoutY="1.0" prefHeight="710.0" prefWidth="1025.0" style="-fx-background-color: #ffffff;" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="tabCadastroProfessores" text="Gestão de Professores">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="643.0" prefWidth="1026.0">
+                            <children>
+                                <TableView fx:id="tbMaterias" focusTraversable="false" layoutX="476.0" layoutY="80.0" prefHeight="226.0" prefWidth="526.0">
+                                    <columns>
+                                        <TableColumn fx:id="clmSelecionarMateria" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                        <TableColumn fx:id="clmIdMateria" prefWidth="47.20001220703125" text="ID" />
+                                        <TableColumn fx:id="clmNomeMateria" maxWidth="443.199951171875" minWidth="286.4000244140625" prefWidth="286.4000244140625" text="Nome da Matéria" />
+                                        <TableColumn fx:id="clmAbrevNome" maxWidth="280.7999267578125" minWidth="97.5999755859375" prefWidth="137.60009765625" text="Abrev. do Nome" />
+                                    </columns>
+                                </TableView>
+                                <TableView fx:id="tbSalas" editable="true" focusTraversable="false" layoutX="476.0" layoutY="356.0" prefHeight="230.0" prefWidth="526.0">
+                                    <columns>
+                                        <TableColumn fx:id="clmSelecionarSala" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
+                                        <TableColumn fx:id="clmIdSala" maxWidth="133.5999755859375" minWidth="37.60003662109375" prefWidth="48.00006103515625" text="ID" />
+                                        <TableColumn fx:id="clmNomeSala" maxWidth="593.6000366210938" minWidth="166.39996337890625" prefWidth="268.0" text="Nome da Sala" />
+                                        <TableColumn fx:id="clmTecnico" maxWidth="173.59995117187498" prefWidth="155.199951171875" text="Técnico" />
+                                    </columns>
+                                </TableView>
+                                <Label focusTraversable="false" layoutX="476.0" layoutY="47.0" prefHeight="26.0" prefWidth="197.0" text="Selecione as Matérias">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label focusTraversable="false" layoutX="476.0" layoutY="329.0" prefHeight="26.0" prefWidth="197.0" text="Selecione as Salas">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label focusTraversable="false" layoutX="36.0" layoutY="166.0" prefHeight="26.0" prefWidth="185.0" text="Nome do Professor">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="33.0" layoutY="80.0" prefHeight="26.0" prefWidth="197.0" text="Cadastrar Professores">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label focusTraversable="false" layoutX="36.0" layoutY="272.0" prefHeight="26.0" prefWidth="107.0" text="Cor Primária">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <JFXButton fx:id="btnCadastrar" focusTraversable="false" layoutX="879.0" layoutY="614.0" prefHeight="27.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Cadastrar">
+                                    <tooltip>
+                                        <Tooltip text="Clique para Cadastrar um Professor" />
+                                    </tooltip></JFXButton>
+                                <TextField fx:id="txtNomeProf" focusTraversable="false" layoutX="190.0" layoutY="165.0" prefHeight="27.0" prefWidth="237.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;">
+                                    <tooltip>
+                                        <Tooltip text="Insira o Nome de um Professor" />
+                                    </tooltip></TextField>
+                                <JFXColorPicker fx:id="clpCorSecundaria" focusTraversable="false" layoutX="152.0" layoutY="336.0" maxHeight="800.0" maxWidth="800.0" minHeight="0.0" minWidth="0.0" prefHeight="38.0" prefWidth="214.0" AnchorPane.bottomAnchor="306.0" AnchorPane.topAnchor="336.0">
+                                    <tooltip>
+                                        <Tooltip text="Selecione a cor Secundária do Professor" />
+                                    </tooltip></JFXColorPicker>
+                                <JFXColorPicker fx:id="clpCorPrimaria" focusTraversable="false" layoutX="153.0" layoutY="269.0" prefHeight="50.0" prefWidth="214.0" AnchorPane.bottomAnchor="372.0" AnchorPane.topAnchor="269.0">
+                                    <tooltip>
+                                        <Tooltip text="Selecione a cor Primária do Professor" />
+                                    </tooltip></JFXColorPicker>
+                                <Label focusTraversable="false" layoutX="36.0" layoutY="339.0" prefHeight="26.0" prefWidth="150.0" text="Cor Secundária">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label focusTraversable="false" layoutX="36.0" layoutY="217.0" prefHeight="26.0" prefWidth="150.0" text="Cores do Professor">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <JFXButton fx:id="btnCancelar" focusTraversable="false" layoutX="716.0" layoutY="614.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: #A9A9A9;" text="Cancelar" visible="false" />
+                                <Label fx:id="lblMsgPreencher" layoutX="33.0" layoutY="115.0" prefHeight="18.0" prefWidth="348.0" textFill="#f00202" />
+                                <Label fx:id="lblMsgExistenteNomeProf" layoutX="255.0" layoutY="145.0" maxHeight="20.0" minHeight="15.0" prefHeight="20.0" prefWidth="173.0" textFill="#f00202" />
+                                <Label fx:id="lblMsgExistenteCorPrim" layoutX="192.0" layoutY="249.0" maxHeight="20.0" minHeight="15.0" prefHeight="20.0" prefWidth="173.0" textFill="#f00202" />
+                                <Label fx:id="lblMsgExistenteCorSec" layoutX="189.0" layoutY="320.0" maxHeight="20.0" minHeight="15.0" prefHeight="18.0" prefWidth="176.0" textFill="#f00202" AnchorPane.topAnchor="316.0" />
+                                <Button fx:id="btnQuestion1" layoutX="217.0" layoutY="80.0" maxHeight="100.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/icons8_help_50px.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip fx:id="tooltipMsg1" autoHide="true" text="Aqui você pode cadastrar os professores" />
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tabVisualizarProf" text="Visualizar Professores">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="-345.0" layoutY="-216.0" prefHeight="27.0" prefWidth="204.0" text="Professores Cadastrados">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TableView fx:id="tbProfessores" focusTraversable="false" layoutX="19.0" layoutY="86.0" prefHeight="505.0" prefWidth="994.0">
+                                    <columns>
+                                        <TableColumn fx:id="clmIdProf" maxWidth="75.0" minWidth="41.600006103515625" prefWidth="41.600006103515625" text="ID" />
+                                        <TableColumn fx:id="clmNomeProf" maxWidth="293.6000061035156" minWidth="85.60000610351562" prefWidth="194.39999389648438" text="Nome do Professor" />
+                                        <TableColumn fx:id="clmSalaProf" maxWidth="526.4000244140625" minWidth="47.199981689453125" prefWidth="363.1999816894531" text="Salas do Professor" />
+                                        <TableColumn fx:id="clmMateriaProf" maxWidth="699.2000122070312" minWidth="203.20004272460938" prefWidth="272.800048828125" text="Matérias do Professor" />
+                                        <TableColumn fx:id="clmCorPrimaria" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" />
+                                        <TableColumn fx:id="clmCorSecundaria" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" />
+                                    </columns>
+                                </TableView>
+                                <JFXButton fx:id="btnExcluir" focusTraversable="false" layoutX="864.0" layoutY="624.0" prefHeight="27.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Excluir">
+                                    <tooltip>
+                                        <Tooltip text="Clique para Excluir um Professor" />
+                                    </tooltip></JFXButton>
+                                <JFXButton fx:id="btnAlterar" focusTraversable="false" layoutX="727.0" layoutY="624.0" prefHeight="27.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Alterar">
+                                    <tooltip>
+                                        <Tooltip text="Clique para Alterar um Professor" />
+                                    </tooltip></JFXButton>
+                                <Button fx:id="btnQuestion11" layoutX="843.0" layoutY="44.0" maxHeight="100.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+                                    <graphic>
+                                        <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/icons8_help_50px.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <tooltip>
+                                        <Tooltip fx:id="tooltipMsg11" autoHide="true" text="Aqui você pode visualizar e pesquisar os Professores cadastradas" />
+                                    </tooltip>
+                                </Button>
+                                <JFXButton fx:id="btnPesquisarProfessores" focusTraversable="false" layoutX="743.0" layoutY="43.0" maxHeight="33.0" maxWidth="38.0" minHeight="33.0" minWidth="38.0" prefHeight="33.0" prefWidth="38.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #FFFFFF;" text=" ">
+                                    <graphic>
+                                        <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/icons8_search_filled_36px.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="btnRestaurarProfessores" focusTraversable="false" layoutX="781.0" layoutY="43.0" maxHeight="33.0" maxWidth="38.0" minHeight="33.0" minWidth="38.0" prefHeight="33.0" prefWidth="38.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #FFFFFF #FFFFFF;" text=" ">
+                                    <graphic>
+                                        <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/icons8_recurring_appointment_filled_36px.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXTextField fx:id="txtPesquisarProfessor" focusColor="BLACK" layoutX="177.0" layoutY="38.0" prefHeight="30.0" prefWidth="562.0" promptText="Pesquisar Nome do Professor" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <JFXButton fx:id="btnConfig" focusTraversable="false" layoutX="1171.0" layoutY="1.0" prefHeight="30.0" prefWidth="19.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_engineering_50px_3.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnMinimizar" focusTraversable="false" layoutX="1123.0" prefHeight="32.0" prefWidth="34.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_minus_24px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnSair" focusTraversable="false" layoutX="1217.0" prefHeight="32.0" prefWidth="23.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <Pane fx:id="paneConfig" layoutX="967.0" layoutY="42.0" prefHeight="195.0" prefWidth="300.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="40.0">
+            <children>
+                <Label layoutX="30.0" layoutY="14.0" prefHeight="19.0" prefWidth="204.0" text="Configurações de Sistema" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="30.0" layoutY="51.0" prefHeight="19.0" prefWidth="204.0" text="Tamanho da Janela" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <JFXRadioButton fx:id="rdb1280x720" disable="true" focusTraversable="false" layoutX="31.0" layoutY="86.0" selected="true" text="1280 x 720" textFill="#fafafa" />
+                <JFXRadioButton fx:id="rdb1600x900" focusTraversable="false" layoutX="31.0" layoutY="148.0" text="1600 x 900" textFill="WHITE" />
+                <JFXRadioButton fx:id="rdb1280x1024" focusTraversable="false" layoutX="31.0" layoutY="116.0" text="1280 x 1024" textFill="WHITE" />
+            </children>
+        </Pane>
+        <Pane fx:id="paneFundo" layoutX="9.0" layoutY="15.0" opacity="0.63" prefHeight="717.0" prefWidth="1281.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Pane fx:id="paneExcluirProf" layoutX="514.0" layoutY="312.0" prefHeight="202.0" prefWidth="386.0" style="-fx-background-color: #ffffff; -fx-border-color: black;" visible="false" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="250.0">
+            <children>
+                <Label layoutX="39.0" layoutY="59.0" prefHeight="25.0" prefWidth="310.0" text="Deseja Realmente Excluir este Professor?" textAlignment="CENTER">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="btnExcluirNao" layoutX="194.0" layoutY="119.0" prefHeight="27.0" prefWidth="122.0" ripplerFill="#df2d2d" style="-fx-border-color: #a71d1d;" text="Não" />
+                <JFXButton fx:id="btnExcluirSim" focusTraversable="false" layoutX="48.0" layoutY="119.0" prefHeight="27.0" prefWidth="122.0" ripplerFill="#3cb267" style="-fx-border-color: #2E8B57;" text="Sim" />
+                <JFXButton fx:id="btnSairExcluirProf" focusTraversable="false" layoutX="333.0" minWidth="10.0" prefHeight="30.0" prefWidth="31.0" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="23.0" opacity="0.73" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

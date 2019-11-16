@@ -1,0 +1,95 @@
+  .SmallButton{
+   -fx-background-radius: 10em;
+   -fx-border-radius: 10em;
+   -fx-min-width: 20px;
+   -fx-min-height: 20px;
+   -fx-max-width: 20px;
+   -fx-max-height: 20px;
+   -fx-background-insets: 0px;
+   -fx-padding: 0px;
+   -fx-border-width: 5px;
+  }
+  .Button1px{
+   fx-background-radius: 10em;
+   -fx-border-radius: 10em;
+   -fx-min-width: 1px;
+   -fx-min-height: 1px;
+   -fx-max-width: 1px;
+       -fx-max-height: 1px;
+       -fx-background-insets: 0px;
+       -fx-padding: 0px;
+       -fx-border-width: 10px;
+
+
+  }
+
+   .BigButton{
+   -fx-background-radius: 10em;
+   -fx-border-radius: 10em;
+   -fx-min-width: 40px;
+   -fx-min-height: 40px;
+   -fx-max-width: 40px;
+   -fx-max-height: 40px;
+   -fx-background-insets: 0px;
+   -fx-padding: 0px;
+   -fx-border-width: 10px;
+   }
+
+    .MediumButton{
+    -fx-background-radius: 10em;
+    -fx-border-radius: 10em;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    -fx-background-insets: 0px;
+    -fx-padding: 0px;
+    -fx-border-width: 7px;
+   }
+
+   .SquareSmallButton{
+   -fx-background-radius: 0em;
+   -fx-border-radius: 0em;
+   -fx-min-width: 20px;
+   -fx-min-height: 20px;
+   -fx-max-width: 20px;
+   -fx-max-height: 20px;
+   -fx-background-insets: 0px;
+   -fx-padding: 0px;
+   -fx-border-width: 5px;
+  }
+
+   .SquareMediumButton{
+   -fx-background-radius: 0em;
+   -fx-border-radius: 0em;
+   -fx-min-width: 30px;
+   -fx-min-height: 30px;
+   -fx-max-width: 30px;
+   -fx-max-height: 30px;
+   -fx-background-insets: 0px;
+   -fx-padding: 0px;
+   -fx-border-width: 7px;
+  }
+
+   .SquareBigButton{
+   -fx-background-radius: 0em;
+   -fx-border-radius: 0em;
+   -fx-min-width: 40px;
+   -fx-min-height: 40px;
+   -fx-max-width: 40px;
+   -fx-max-height: 40px;
+   -fx-background-insets: 0px;
+   -fx-padding: 0px;
+   -fx-border-width: 10px;
+  }
+
+   .DeleteButton{
+   -fx-background-color: #FFFFFF;
+   -fx-border-color: black;
+   -fx-border-width: 2;
+   -fx-border-radius: 40;
+   -fx-background-radius: 40;
+   -fx-pref-height: 40;
+   -fx-pref-width: 80;
+   }
+

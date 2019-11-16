@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="890.0" maxWidth="1550.0" minHeight="890.0" minWidth="1550.0" prefHeight="890.0" prefWidth="1550.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalasController">
+    <children>
+        <AnchorPane layoutX="10.0" layoutY="-7.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" layoutX="-11.0" layoutY="-1.0" prefHeight="786.0" prefWidth="242.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="125.0" maxWidth="228.0" minHeight="125.0" minWidth="228.0" prefHeight="125.0" prefWidth="228.0" text="Label" textFill="#27282a" />
+                        <JFXButton fx:id="btnTelaMenuInicial" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="316.0" text="  Menu Inicial" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_home_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSalas" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="322.0" style="-fx-background-color: #525355; -fx-border-color: #525355;" text="  Salas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_google_classroom_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaMaterias" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="335.0" text="  Matérias" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_overview_pages_1_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaProfessores" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="337.0" text="  Professores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_conference_background_selected_filled_50px_2.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaGradeEscolar" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" text="  Grade Escolar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_timetable_50px_1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSeguranca" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" text="  Segurança" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_keyhole_shield_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <Label prefHeight="248.0" prefWidth="343.0" text="Label" textFill="#27282a" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="720.0" prefWidth="11.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox layoutX="-22.0" layoutY="-50.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="126.0" minHeight="125.0" prefHeight="125.0" prefWidth="83.0" textFill="#27282a" />
+                        <Pane maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="59.0" style="-fx-background-color: #20B2AA; -fx-border-color: #20B2AA;" />
+                        <Pane prefHeight="50.0" prefWidth="58.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <Label layoutX="269.0" layoutY="224.0" prefHeight="27.0" prefWidth="147.0" text="Nome da Sala" AnchorPane.leftAnchor="269.0" AnchorPane.topAnchor="224.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="267.0" layoutY="123.0" prefHeight="26.0" prefWidth="197.0" text="Cadastrar Salas" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="123.0">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tbSala" focusTraversable="false" layoutX="791.0" layoutY="237.0" prefHeight="566.0" prefWidth="710.0">
+            <columns>
+                <TableColumn fx:id="clmId" maxWidth="75.20001220703125" minWidth="60.0" prefWidth="75.20001220703125" text="ID" />
+                <TableColumn fx:id="clmNomeSala" maxWidth="607.0" minWidth="168.00003051757812" prefWidth="311.99993896484375" text="Nome da Sala" />
+                <TableColumn fx:id="clmTecnico" maxWidth="393.5999755859375" prefWidth="314.4000244140625" text="Técnico" />
+            </columns>
+        </TableView>
+        <Label layoutX="791.0" layoutY="122.0" text="Salas Cadastradas">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <Separator layoutX="759.0" layoutY="25.0" orientation="VERTICAL" prefHeight="838.0" prefWidth="16.0" />
+        <JFXButton fx:id="btnCadastrar" focusTraversable="false" layoutX="546.0" layoutY="352.0" prefHeight="27.0" prefWidth="156.0" style="-fx-border-color: #A9A9A9;" text="Cadastrar">
+            <tooltip>
+                <Tooltip text="Clique para Cadastrar uma Sala" />
+            </tooltip></JFXButton>
+        <TextField fx:id="txtNomeSala" focusTraversable="false" layoutX="424.0" layoutY="223.0" prefHeight="27.0" prefWidth="289.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;">
+            <tooltip>
+                <Tooltip text="Insira o nome de uma Sala" />
+            </tooltip></TextField>
+        <JFXButton fx:id="btnExcluir" focusTraversable="false" layoutX="1347.0" layoutY="825.0" prefHeight="27.0" prefWidth="156.0" style="-fx-border-color: #A9A9A9;" text="Excluir">
+            <tooltip>
+                <Tooltip text="Clique para Excluir uma Sala" />
+            </tooltip></JFXButton>
+        <JFXButton fx:id="btnAlterar" focusTraversable="false" layoutX="1147.0" layoutY="825.0" prefHeight="27.0" prefWidth="156.0" style="-fx-border-color: #A9A9A9;" text="Alterar">
+            <tooltip>
+                <Tooltip text="Clique para Alterar uma Sala" />
+            </tooltip></JFXButton>
+        <JFXButton fx:id="btnConfig" focusTraversable="false" layoutX="1457.0" layoutY="-1.0" prefHeight="30.0" prefWidth="19.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_engineering_50px_3.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnMinimizar" focusTraversable="false" layoutX="1409.0" layoutY="-2.0" prefHeight="32.0" prefWidth="34.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_minus_24px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnCancelar" focusTraversable="false" layoutX="1355.0" layoutY="825.0" prefHeight="27.0" prefWidth="156.0" style="-fx-border-color: #A9A9A9;" text="Cancelar" visible="false" />
+        <Label fx:id="lblMsgPreencher" layoutX="267.0" layoutY="170.0" prefHeight="25.0" prefWidth="366.0" textFill="#f00202" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="170.0">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="269.0" layoutY="284.0" prefHeight="32.0" prefWidth="110.0" text="Sala Técnica">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <JFXCheckBox fx:id="txbSim" checkedColor="LIGHTSEAGREEN" focusTraversable="false" layoutX="424.0" layoutY="289.0" prefHeight="18.0" prefWidth="61.0" text="Sim" unCheckedColor="DARKGRAY">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <tooltip>
+                <Tooltip text="Selecione se a Sala for Técnica" />
+            </tooltip>
+        </JFXCheckBox>
+        <JFXCheckBox fx:id="txbNao" checkedColor="LIGHTSEAGREEN" focusTraversable="false" layoutX="499.0" layoutY="289.0" prefHeight="18.0" prefWidth="61.0" text="Não" unCheckedColor="DARKGRAY">
+            <font>
+                <Font size="17.0" />
+            </font>
+            <tooltip>
+                <Tooltip text="Selecione se a Sala não for Técnica" />
+            </tooltip>
+        </JFXCheckBox>
+        <Label fx:id="lblMsgExistente" layoutX="547.0" layoutY="193.0" maxHeight="27.0" minHeight="15.0" prefHeight="27.0" prefWidth="172.0" textFill="#f00202">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <JFXButton fx:id="btnSair" focusTraversable="false" layoutX="1502.0" layoutY="-2.0" prefHeight="32.0" prefWidth="34.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnPesquisarSalas" focusTraversable="false" layoutX="1421.0" layoutY="190.0" maxHeight="33.0" maxWidth="38.0" minHeight="33.0" minWidth="38.0" prefHeight="33.0" prefWidth="38.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #FFFFFF;" text=" ">
+            <graphic>
+                <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_search_filled_36px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnRestaurarSalas" focusTraversable="false" layoutX="1459.0" layoutY="190.0" maxHeight="33.0" maxWidth="38.0" minHeight="33.0" minWidth="38.0" prefHeight="33.0" prefWidth="38.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #FFFFFF #FFFFFF;" text=" ">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_recurring_appointment_filled_36px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <Button fx:id="btnQuestion" layoutX="451.0" layoutY="128.0" maxHeight="100.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+            <graphic>
+                <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_help_50px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <tooltip>
+                <Tooltip fx:id="tooltipMsg" autoHide="true" text="Aqui você pode cadastrar as Salas" />
+            </tooltip>
+        </Button>
+        <Button fx:id="btnQuestion1" layoutX="1004.0" layoutY="128.0" maxHeight="100.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+            <tooltip>
+                <Tooltip fx:id="tooltipMsg1" autoHide="true" text="Aqui você pode visualisar e pesquisar as Salas cadastradas" />
+            </tooltip>
+         <graphic>
+                <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_help_50px.png" />
+                    </image>
+                </ImageView>
+         </graphic>
+        </Button>
+        <JFXTextField fx:id="txtPesquisarSala" focusColor="BLACK" layoutX="795.0" layoutY="183.0" prefHeight="30.0" prefWidth="625.0" promptText="Pesquisar Nome da Sala">
+         <font>
+            <Font size="17.0" />
+         </font></JFXTextField>
+        <Pane fx:id="paneFundo" layoutX="-1.0" layoutY="5.0" opacity="0.63" prefHeight="717.0" prefWidth="1281.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <Pane fx:id="paneExcluirSala" layoutX="504.0" layoutY="302.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: black;" visible="false" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="490.0" AnchorPane.rightAnchor="490.0" AnchorPane.topAnchor="275.0">
+            <children>
+                <Label layoutX="135.0" layoutY="78.0" prefHeight="27.0" prefWidth="331.0" text="  Deseja Realmente Excluir esta Sala?">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="btnExcluirNao" buttonType="RAISED" layoutX="308.0" layoutY="226.0" prefHeight="34.0" prefWidth="156.0" ripplerFill="#ea7f7f" style="-fx-border-color: #a71d1d; -fx-background-color: #ef6161;" text="Não" />
+                <JFXButton fx:id="btnExcluirSim" buttonType="RAISED" focusTraversable="false" layoutX="107.0" layoutY="226.0" prefHeight="34.0" prefWidth="156.0" ripplerFill="#7eeaa4" style="-fx-border-color: #2E8B57; -fx-background-color: #60da8b;" text="Sim" />
+                <JFXButton fx:id="btnSairExcluirSala" focusTraversable="false" layoutX="525.0" layoutY="8.0" minWidth="10.0" prefHeight="34.0" prefWidth="38.0" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="27.0" opacity="0.73" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+                <Label fx:id="lblMsgErroExcluir" alignment="TOP_CENTER" layoutX="107.0" layoutY="112.0" prefHeight="76.0" prefWidth="357.0" textAlignment="CENTER" textFill="#ff0404">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="paneConfig" layoutX="957.0" layoutY="32.0" prefHeight="218.0" prefWidth="300.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="32.0">
+            <children>
+                <Label layoutX="30.0" layoutY="14.0" prefHeight="27.0" prefWidth="252.0" text="Configurações de Sistema" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="30.0" layoutY="51.0" prefHeight="19.0" prefWidth="204.0" text="Tamanho da Janela" textFill="WHITE">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <JFXRadioButton fx:id="rdb1280x720" focusTraversable="false" layoutX="30.0" layoutY="99.0" text="1280 x 720" textFill="#fafafa">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXRadioButton>
+                <JFXRadioButton fx:id="rdb1600x900" disable="true" focusTraversable="false" layoutX="30.0" layoutY="161.0" selected="true" text="1600 x 900" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXRadioButton>
+                <JFXRadioButton fx:id="rdb1280x1024" focusTraversable="false" layoutX="30.0" layoutY="129.0" text="1280 x 1024" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXRadioButton>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

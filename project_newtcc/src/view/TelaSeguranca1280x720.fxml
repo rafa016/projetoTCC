@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" maxHeight="710.0" maxWidth="1265.0" minHeight="710.0" minWidth="1265.0" prefHeight="710.0" prefWidth="1265.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SegurancaController">
+    <children>
+        <AnchorPane layoutX="10.0" layoutY="-7.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox alignment="TOP_RIGHT" layoutX="-11.0" layoutY="-1.0" prefHeight="786.0" prefWidth="242.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="125.0" maxWidth="228.0" minHeight="125.0" minWidth="228.0" prefHeight="125.0" prefWidth="228.0" text="Label" textFill="#27282a" />
+                        <JFXButton fx:id="btnTelaMenuInicial" alignment="BASELINE_LEFT" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="316.0" text="  Menu Inicial" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_home_32px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSalas" alignment="BASELINE_LEFT" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="322.0" text="  Salas" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_google_classroom_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaMaterias" alignment="BASELINE_LEFT" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="335.0" text="  Matérias" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_overview_pages_1_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaProfessores" alignment="BASELINE_LEFT" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="337.0" text="  Professores" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_conference_background_selected_filled_50px_2.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaGradeEscolar" alignment="BASELINE_LEFT" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" text="  Grade Escolar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_timetable_50px_1.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTelaSeguranca" alignment="BASELINE_LEFT" buttonType="RAISED" focusTraversable="false" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="342.0" style="-fx-background-color: #525355; -fx-border-color: #525355;" text="  Segurança" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icons8_keyhole_shield_50px.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </JFXButton>
+                        <Label prefHeight="248.0" prefWidth="343.0" text="Label" textFill="#27282a" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="720.0" prefWidth="11.0" style="-fx-background-color: #27282A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox layoutX="-22.0" layoutY="-50.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label maxHeight="126.0" minHeight="125.0" prefHeight="125.0" prefWidth="83.0" textFill="#27282a" />
+                        <Pane fx:id="paneMenuInicial" maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane fx:id="paneSalas" prefHeight="50.0" prefWidth="59.0" />
+                        <Pane fx:id="paneMaterias" prefHeight="50.0" prefWidth="58.0" style="-fx-background-color: #27282A; -fx-border-color: #27282A;" />
+                        <Pane fx:id="paneProfessores" prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #27282A;" />
+                        <Pane fx:id="paneGradeEscolar" prefHeight="50.0" prefWidth="111.0" />
+                        <Pane prefHeight="50.0" prefWidth="111.0" style="-fx-background-color: #20B2AA; -fx-border-color: #20B2AA;" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <JFXButton fx:id="btnConfig" focusTraversable="false" layoutX="1171.0" layoutY="1.0" prefHeight="30.0" prefWidth="19.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_engineering_50px_3.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnMinimizar" focusTraversable="false" layoutX="1123.0" prefHeight="32.0" prefWidth="34.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_minus_24px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="btnSair" focusTraversable="false" layoutX="1217.0" prefHeight="32.0" prefWidth="34.0" text=" ">
+            <graphic>
+                <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </JFXButton>
+      <Label focusTraversable="false" layoutX="316.0" layoutY="119.0" prefHeight="26.0" prefWidth="270.0" text="Configurações de Segurança">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="316.0" layoutY="176.0" prefHeight="26.0" prefWidth="224.0" text="Gerenciamento de Backups">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="316.0" layoutY="371.0" prefHeight="18.0" prefWidth="190.0" text="Gerenciamento de Senha">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnTrocaSenha" focusTraversable="false" layoutX="312.0" layoutY="413.0" prefHeight="27.0" prefWidth="244.0" style="-fx-border-color: #A9A9A9;" text="Trocar Senha">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Aqui você pode Trocar sua Senha" />
+         </tooltip>
+      </JFXButton>
+      <Separator layoutX="299.0" layoutY="338.0" prefHeight="18.0" prefWidth="872.0" />
+      <JFXButton fx:id="btnRestauraBackup" focusTraversable="false" layoutX="319.0" layoutY="237.0" prefHeight="74.0" prefWidth="260.0" text="Restaurar Backup">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8_data_backup_50px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Aqui você pode Restaurar o Backup" />
+         </tooltip>
+      </JFXButton>
+      <JFXButton fx:id="btnSalvaBackup" focusTraversable="false" layoutX="613.0" layoutY="237.0" prefHeight="74.0" prefWidth="230.0" text="Salvar Backup">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="54.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8_accept_database_50px_2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip text="Aqui você pode Salvar o Backup" />
+         </tooltip>
+      </JFXButton>
+      <Button fx:id="btnQuestion" layoutX="569.0" layoutY="124.0" maxHeight="100.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8_help_50px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <tooltip>
+            <Tooltip fx:id="tooltipMsg" autoHide="true" text="Aqui você pode modificar as Configurações de Segurança" />
+         </tooltip>
+      </Button>
+      <Separator layoutX="305.0" layoutY="474.0" prefHeight="18.0" prefWidth="872.0" />
+      <Label focusTraversable="false" layoutX="316.0" layoutY="505.0" prefHeight="18.0" prefWidth="190.0" text="Registro de Alterações">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnConsultarLog" focusTraversable="false" layoutX="312.0" layoutY="547.0" prefHeight="27.0" prefWidth="244.0" style="-fx-border-color: #A9A9A9;" text="Consultar Histórico (LOG)">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Aqui você pode Trocar sua Senha" />
+         </tooltip>
+      </JFXButton>
+      <Pane fx:id="paneFundo" layoutX="-2.0" layoutY="-5.0" opacity="0.63" prefHeight="717.0" prefWidth="1272.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Pane id="PaneSalvarBackup" fx:id="paneSalvarBackup" layoutX="200.0" layoutY="169.0" prefHeight="394.0" prefWidth="846.0" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+         <children>
+            <Label layoutX="382.0" layoutY="48.0" prefHeight="27.0" prefWidth="139.0" text="Salvar Backup">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnSalvarBackupDoBd" focusTraversable="false" layoutX="451.0" layoutY="211.0" prefHeight="3.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Salvar Backup" />
+            <TextField fx:id="txtLocalSalvarBackup" focusTraversable="false" layoutX="160.0" layoutY="144.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;" />
+            <JFXButton fx:id="btnSelecionarLocal" focusTraversable="false" layoutX="604.0" layoutY="144.0" prefHeight="27.0" prefWidth="139.0" style="-fx-border-color: #A9A9A9;" text="Selecionar Local" />
+            <JFXButton fx:id="btnCancelar" focusTraversable="false" layoutX="313.0" layoutY="211.0" prefHeight="3.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Cancelar" />
+            <Label fx:id="lblMsgErroSalvarBackup" layoutX="158.0" layoutY="103.0" prefHeight="24.0" prefWidth="448.0" textFill="RED">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMsgSucessoSalvarBackup" layoutX="158.0" layoutY="103.0" prefHeight="24.0" prefWidth="254.0" textFill="#3f9c60">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnFecharPaneSalvarBackup" focusTraversable="false" layoutX="828.0" layoutY="8.0" prefHeight="34.0" prefWidth="39.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="31.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane id="PaneRestaurarBackup" fx:id="paneRestaurarBackup" layoutX="210.0" layoutY="179.0" prefHeight="394.0" prefWidth="846.0" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+         <children>
+            <Label layoutX="345.0" layoutY="43.0" prefHeight="26.0" prefWidth="197.0" text="Restaurar Backup">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnRestaurarBackupDoBd" focusTraversable="false" layoutX="414.0" layoutY="211.0" prefHeight="27.0" prefWidth="152.0" style="-fx-border-color: #A9A9A9;" text="Restaurar Backup" />
+            <TextField fx:id="txtLocalRestaurarBackup" focusTraversable="false" layoutX="151.0" layoutY="145.0" prefHeight="27.0" prefWidth="428.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;" />
+            <JFXButton fx:id="btnSelecionarLocalRestaurarBackup" focusTraversable="false" layoutX="601.0" layoutY="145.0" prefHeight="27.0" prefWidth="145.0" style="-fx-border-color: #A9A9A9;" text="Selecionar Local" />
+            <JFXButton fx:id="btnCancelarRestaurarBackup" focusTraversable="false" layoutX="276.0" layoutY="211.0" prefHeight="3.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Cancelar" />
+            <Label fx:id="lblMsgErroRestaurarBackup" layoutX="151.0" layoutY="97.0" prefHeight="24.0" prefWidth="448.0" textFill="RED">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMsgSucessoRestaurarBackup" layoutX="151.0" layoutY="97.0" prefHeight="24.0" prefWidth="254.0" textFill="#3f9c60">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnFecharPaneRestaurarBackup" focusTraversable="false" layoutX="828.0" prefHeight="34.0" prefWidth="39.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="31.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane fx:id="paneConfig" layoutX="967.0" layoutY="42.0" prefHeight="195.0" prefWidth="300.0" style="-fx-background-color: #27282A;" visible="false" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="19.0" prefWidth="204.0" text="Configurações de Sistema" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="51.0" prefHeight="19.0" prefWidth="204.0" text="Tamanho da Janela" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXRadioButton fx:id="rdb1280x720" disable="true" focusTraversable="false" layoutX="31.0" layoutY="86.0" selected="true" text="1280 x 720" textFill="#fafafa" />
+            <JFXRadioButton fx:id="rdb1600x900" focusTraversable="false" layoutX="31.0" layoutY="148.0" text="1600 x 900" textFill="WHITE" />
+            <JFXRadioButton fx:id="rdb1280x1024" focusTraversable="false" layoutX="31.0" layoutY="116.0" text="1280 x 1024" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane id="PaneAlterarSenha" fx:id="paneAlterarSenha" layoutX="190.0" layoutY="159.0" prefHeight="394.0" prefWidth="846.0" style="-fx-background-color: white;" visible="false" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0">
+         <children>
+            <Label layoutX="219.0" layoutY="129.0" prefHeight="13.0" prefWidth="130.0" text="Senha Mestre">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="371.0" layoutY="36.0" prefHeight="26.0" prefWidth="197.0" text="Alteração de Senha">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="219.0" layoutY="173.0" prefHeight="25.0" prefWidth="130.0" text="Nova Senha">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="219.0" layoutY="215.0" prefHeight="13.0" prefWidth="130.0" text="Confirmar Senha">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMsgErro" layoutX="219.0" layoutY="86.0" prefHeight="24.0" prefWidth="448.0" textFill="RED">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMsgSucesso" layoutX="219.0" layoutY="86.0" prefHeight="24.0" prefWidth="254.0" textFill="#3f9c60">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtSenhaMestre" layoutX="357.0" layoutY="128.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;" />
+            <PasswordField fx:id="txtSenha" layoutX="357.0" layoutY="172.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;" />
+            <PasswordField fx:id="txtConfirmSenha" layoutX="357.0" layoutY="214.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: #ffffff; -fx-border-color: #A9A9A9;" />
+            <JFXButton fx:id="btnAlterarSenha" focusTraversable="false" layoutX="459.0" layoutY="285.0" prefHeight="3.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Alterar Senha" />
+            <JFXButton fx:id="btnCancelarAlterarSenha" focusTraversable="false" layoutX="321.0" layoutY="285.0" prefHeight="3.0" prefWidth="122.0" style="-fx-border-color: #A9A9A9;" text="Cancelar" />
+            <JFXButton fx:id="btnFecharPaneAlterarSenha" focusTraversable="false" layoutX="828.0" prefHeight="34.0" prefWidth="39.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="31.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8_delete_sign_32px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Hyperlink fx:id="hplPoliticaDeSenhas" layoutX="27.0" layoutY="341.0" prefHeight="23.0" prefWidth="300.0" text="Clique aqui para ver a Política de Senhas" textFill="#1111ff" />
+         </children>
+      </Pane>
+      <Pane id="paneFundoCarregando" fx:id="paneFundoCarregando" layoutX="8.0" layoutY="5.0" opacity="0.66" prefHeight="717.0" prefWidth="1272.0" style="-fx-background-color: black;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXSpinner focusTraversable="false" layoutX="483.0" layoutY="257.0" prefHeight="182.0" prefWidth="300.0" />
+            <Label layoutX="583.0" layoutY="335.0" text="Carregando..." textFill="#fff6f6">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>
